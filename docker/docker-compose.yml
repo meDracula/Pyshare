@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  mongo:
+    build: "mongo/."
+    container_name: "PyshareMongo"
+    ports:
+      - 22022:22017
+    cap_add:
+      - SYS_NICE
+    restart: always
+    volumes:
+      - "./vol:/vol"
+
