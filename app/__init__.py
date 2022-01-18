@@ -18,4 +18,3 @@ def create_app():
 if __name__ == '__main__':
     load_dotenv()
     create_app().run()
-

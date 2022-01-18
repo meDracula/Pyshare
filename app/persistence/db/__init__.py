@@ -24,12 +24,14 @@ def init_db(app, show=False):
         print("Client: ", client)
         print("Databases:", client.list_database_names(), f"{DB_NAME}:", database in client.list_database_names())
 
+
 class ResultList(list):
     def first_or_none(self):
         return self[0] if len(self) > 0 else None
 
     def last_or_none(self):
         return self[-1] if len(self) > 0 else None
+
 
 class Document(dict, ABC):
     collection = None

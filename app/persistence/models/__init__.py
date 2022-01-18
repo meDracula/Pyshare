@@ -1,6 +1,7 @@
 from app.persistence.db import Document, db
 from werkzeug.security import generate_password_hash, check_password_hash
 
+
 class User(Document):
     collection = db.users
 
@@ -21,4 +22,3 @@ class User(Document):
     @classmethod
     def verify_password(cls, password_hash, password):
         return check_password_hash(password_hash, password)
-
