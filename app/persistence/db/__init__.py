@@ -4,7 +4,8 @@ from abc import ABC
 client = None
 db = None
 
-def init_db(app):
+
+def init_db(app, show=False):
     """
     Set environment variables for the database in .env file in the project root directory.
     """
@@ -16,6 +17,12 @@ def init_db(app):
     database = app.config["DB_NAME"]
     client = MongoClient(f'mongodb://{username}:{password}@{host}:{port}')
     db = client[database]
+
+    if show:
+        for cat, status in client.server_info().items():
+            print(cat, status)
+        print("Client: ", client)
+        print("Databases:", client.list_database_names(), f"{DB_NAME}:", database in client.list_database_names())
 
 class ResultList(list):
     def first_or_none(self):
@@ -57,7 +64,8 @@ class Document(dict, ABC):
 
     @classmethod
     def find(cls, **kwargs):
-        return ResultList(cls(item) for item in cls.collection.find(kwargs))
+        #return ResultList(cls(item) for item in cls.collection.find(kwargs))
+        return cls.collection.find(kwargs)
 
     @classmethod
     def delete(cls, **kwargs):

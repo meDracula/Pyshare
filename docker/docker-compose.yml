@@ -5,7 +5,7 @@ services:
     build: "mongo/."
     container_name: "PyshareMongo"
     ports:
-      - 22022:22017
+      - 27022:27017
     cap_add:
       - SYS_NICE
     restart: always
