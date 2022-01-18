@@ -24,10 +24,10 @@ the solution and then rate the others users solutions.(Like in codewars withe Be
 ### Extra features
 * A Challenge category:
 	- Users can post problem not for a practical reason of help but for challanging other users to solve.
-	- THe challenge feature will give more of a ranking to users profiles and their skills
+	- The challenge feature will give more of a ranking to users profiles and their skills
 * A Code dump category:
 	- A copy-paste of the users code that is relevant to the error as the user percives it.
-	- A textbox of a copy-paste with error from 1st line(start) to the last line(finsih)
+	- A textbox of a copy-paste with error from 1st line(start) to the last line(finish)
 
 
 ## Insperation
