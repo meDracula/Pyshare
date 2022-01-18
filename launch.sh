@@ -2,12 +2,11 @@
 echo "======= Initilazing ======="
 export PYTHONPATH="${PYTHONPATH}:${PWD}/app"
 
-echo "======= Requirements ======="
-echo "Do you need to check requirements? [y/n]: "
-read var
-if [ $var = "y" ]; then
+if [ $1 = "req" ]; then
+	echo "======= Requirements ======="
 	pip install -r requirements.txt
 fi
+shift
 
 echo "======= Launching Docker ======="
 function dockerUp () {
@@ -26,6 +25,10 @@ else
 fi
 
 echo "======= Launching Flask ======="
+if [ $1 = "key" ]; then
+	python utils/gen_secret_key.py
+fi
+
 flask run
 
 echo "exit 0"
