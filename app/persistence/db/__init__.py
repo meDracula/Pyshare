@@ -19,10 +19,9 @@ def init_db(app, show=False):
     db = client[database]
 
     if show:
-        for cat, status in client.server_info().items():
-            print(cat, status)
+        print(*[f"{cat} {status}\n" for cat, status in client.server_info().items()])
         print("Client: ", client)
-        print("Databases:", client.list_database_names(), f"{DB_NAME}:", database in client.list_database_names())
+        print("Databases:", client.list_database_names(), f"{database}:", database in client.list_database_names())
 
 
 class ResultList(list):
@@ -40,7 +39,7 @@ class Document(dict, ABC):
         super().__init__()
         if '_id' not in data:
             self._id = None
-            self.__dict__.update(data)
+        self.__dict__.update(data)
 
     def __repr__(self):
         return '\n'.join(f'{k} = {v}' for k, v in self.__dict__.items())
@@ -66,8 +65,7 @@ class Document(dict, ABC):
 
     @classmethod
     def find(cls, **kwargs):
-        #return ResultList(cls(item) for item in cls.collection.find(kwargs))
-        return cls.collection.find(kwargs)
+        return ResultList(cls(item) for item in cls.collection.find(kwargs))
 
     @classmethod
     def delete(cls, **kwargs):
