@@ -8,9 +8,18 @@ def create_app():
     app.config.from_pyfile('settings.py')
 
     init_db(app)
-    from .auth import auth
 
+    from .auth import auth
     app.register_blueprint(auth, url_prefix="/")
+
+    from app.blueprints.admin import bp_admin
+    app.register_blueprint(bp_admin)
+
+    from app.blueprints.open import bp_open
+    app.register_blueprint(bp_open)
+
+    from app.blueprints.users import bp_user
+    app.register_blueprint(bp_user)
 
     return app
 

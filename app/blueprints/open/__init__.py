@@ -1,12 +1,24 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from werkzeug.security import generate_password_hash
+
 bp_open = Blueprint('bp_open', __name__)
 
+@bp_open.get('/')
+def index():
+    # if user is login then redirect to account page
+    return redirect('home')
+
+@bp_open.get('/home')
+def home():
+    return render_template('home.html')
+
+@bp_open.get('/posts')
+def posters():
+    return render_template("posters.html")
 
 @bp_open.get('/sign-up')
 def signup_get():
     return render_template('signup.html')
-
 
 @bp_open.post('/signup')
 def signup_post():
