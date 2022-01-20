@@ -1,0 +1,39 @@
+body{
+	margin: 0;
+	color: #fff;
+	background: #181818;
+}
+
+header{
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	height: 100px;
+	width: 100%;
+	background: #111;
+	overflow-x: hidden;
+}
+
+.navsection a{
+	box-sizing: border-box;
+	text-decoration: none;
+	font-size: 50px;
+	padding: 25px;
+	line-height: 100px;
+	color: #fff;
+}
+
+#pyshare{
+	background: linear-gradient(144deg, #2ad1c5, #2a8ad1, #2ad172);
+	color: #fff;
+}
+
+main{
+	margin-top: 100px;
+}
+
+.center{
+	text-align: center;
+}
+
