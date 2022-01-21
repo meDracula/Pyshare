@@ -1,5 +1,5 @@
 from app.persistence.db import Document, db
-from werkzeug.security import generate_password_hash, check_password_hash
+from passlib.hash import argon2
 
 
 class User(Document):
@@ -17,8 +17,8 @@ class User(Document):
 
     @password.setter
     def password(self, passwd):
-        self.__dict__.update({'password': generate_password_hash(passwd)})
+        self.__dict__.update({'password': argon2.using(rounds=12).hash(passwd)})
 
     @classmethod
     def verify_password(cls, password_hash, password):
-        return check_password_hash(password_hash, password)
+        return argon2.verify(password, password_hash)

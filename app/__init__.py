@@ -9,7 +9,7 @@ def create_app():
 
     init_db(app)
 
-    from .auth import auth
+    from app.auth import auth
     app.register_blueprint(auth, url_prefix="/")
 
     from app.blueprints.admin import bp_admin
