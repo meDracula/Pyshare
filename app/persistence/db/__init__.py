@@ -31,6 +31,12 @@ class ResultList(list):
     def last_or_none(self):
         return self[-1] if len(self) > 0 else None
 
+    def full_or_none(self):
+        return self if len(self) > 0 else None
+
+    def nth_or_none(self, n, start=0):
+        return self[start:n] if len(self) >= n else None
+
 
 class Document(dict, ABC):
     collection = None
