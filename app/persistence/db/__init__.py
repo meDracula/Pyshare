@@ -35,6 +35,7 @@ class ResultList(list):
         return self if len(self) > 0 else None
 
     def nth_or_none(self, n, start=0):
+        assert n >= start, "Variable start must me smaller than variable n"
         return self[start:n] if len(self) >= n else None
 
 

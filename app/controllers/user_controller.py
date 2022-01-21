@@ -4,8 +4,8 @@ from app.persistence.repository import user_repo
 def get_all_users():
     return user_repo.get_all_users()
 
-def get_users(username, email):
-    return user_repo.get_users(username, email)
+def get_users(**kwargs):
+    return user_repo.get_users(**kwargs)
 
 def create_new_user(username:str, email:str, password:str):
     return user_repo.create_new_user(username, email, password)

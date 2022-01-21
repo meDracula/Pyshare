@@ -5,8 +5,8 @@ def get_all_users():
     return User.all()
 
 
-def get_users(username, email):
-    return User.find(username=username, email=email)
+def get_users(**kwargs):
+    return User.find(**kwargs)
 
 
 def set_password(user, password:str):
