@@ -9,8 +9,8 @@ def json_create():
             data = []
             password_len = 10
             for _ in range(100):
-                username = username_rf.readline()
-                email = email_rf.readline()
+                username = username_rf.readline().strip()
+                email = email_rf.readline().strip()
                 password = "".join(choice(ascii_uppercase + ascii_lowercase + digits) for _ in range(password_len))
                 data.append({'username': username, 'email': email, 'password': password})
 

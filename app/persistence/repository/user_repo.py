@@ -1,3 +1,4 @@
+from pymongo import errors
 from app.persistence.models import User
 
 
@@ -21,7 +22,11 @@ def verify_user(username, email):
 
 def create_new_user(username:str, email:str, password:str):
     user = User.create(username=username, email=email, password=password)
-    user.save()
+    try:
+        user.save()
+        return True
+    except errors.DuplicateKeyError as e:
+        return list(e.details['keyPattern'].keys())[0]
 
 
 def verify_password(password_hash: str, password:str) -> bool:
