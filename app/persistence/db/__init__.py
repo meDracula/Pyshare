@@ -1,4 +1,4 @@
-from pymongo import MongoClient
+from pymongo import MongoClient, errors
 from abc import ABC
 
 client = None
@@ -54,7 +54,11 @@ class Document(dict, ABC):
     def save(self):
         if not self._id:
             del (self.__dict__['_id'])
-            return self.collection.insert_one(self.__dict__)
+            try:
+                return self.collection.insert_one(self.__dict__)
+            except errors.DuplicateKeyError as e:
+                setattr(e, 'acknowledged', list(e.details['keyPattern'].keys())[0])
+                return e
         else:
             return self.collection.replace_one({'_id': self._id}, self.__dict__)
 
