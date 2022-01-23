@@ -14,7 +14,6 @@ def json_create():
                 password = "".join(choice(ascii_uppercase + ascii_lowercase + digits) for _ in range(password_len))
                 data.append({'username': username, 'email': email, 'password': password})
 
-    #data = json.loads(str(data))
     with open(path+'users.json', 'w', encoding="utf-8") as outfile:
         json.dump(data, outfile, indent=4)
 
