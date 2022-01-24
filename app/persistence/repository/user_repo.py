@@ -1,5 +1,6 @@
-from pymongo import errors
 from app.persistence.models import User
+from datetime import datetime
+from pprint import pprint
 
 
 def get_all_users():
@@ -21,10 +22,13 @@ def verify_user(username, email):
 
 
 def create_new_user(username:str, email:str, password:str):
-    user = User.create(username=username, email=email, password=password)
+    user = User.create(password, username=username, email=email, created=datetime.now())
     return user.save().acknowledged
 
 
 def verify_password(password_hash: str, password:str) -> bool:
     return User.verify_password( password_hash, password)
 
+def stat_find(**kwargs):
+    result = User.find_explain(**kwargs)
+    pprint(result)

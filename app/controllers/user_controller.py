@@ -15,3 +15,6 @@ def verify_user(username: str, email: str) -> bool:
 
 def verify_password(password_hash:str, password:str):
     return user_repo.verify_password(password_hash, password)
+
+def stat_find(**kwargs):
+    return user_repo.stat_find(**kwargs)

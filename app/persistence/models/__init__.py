@@ -6,9 +6,11 @@ class User(Document):
     collection = db.users
 
     @classmethod
-    def create(cls, **data):
+    def create(cls, password, **data):
         user = User(data)
-        user.password = data['password']
+        user.password = password
+        user.__dict__.update({'schema': 1, 'role': 'normie', 'last_active': data['created']})
+        del password, data
         return user
 
     @property
@@ -22,3 +24,44 @@ class User(Document):
     @classmethod
     def verify_password(cls, password_hash, password):
         return argon2.verify(password, password_hash)
+
+class Post(Document):
+    collection = db.posts
+
+    @classmethod
+    def create(cls, **data):
+        post = Post(data)
+        post.__dict__.update({'solved': False, 'schema': 1, "solution_codes": [], "comments": []})
+        del data
+        return post
+
+"""
+post = {
+        _id: <id>,
+        schema: <version-id>,
+        title: <post-title>,
+        username: <name>,
+        created: date,
+        tag: <type-tags>,
+        complex-rating: <rating-score>,
+        solved: boolean,
+        test_code: "py code ...",
+        solution_codes: [
+                        {
+                            soutlion_id: <post_id>+<solution_id>,
+                            username: <name>,
+                            submitted: Date(),
+                            ranking: <ranking>,
+                            solution_code: "py code ..."
+                        }
+                        ]
+        comments: [
+                    {
+                            username: <name>,
+                            coment: <text>,
+                            submitted: Date()
+                    }
+                ]
+        }
+"""
+
