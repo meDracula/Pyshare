@@ -1,4 +1,4 @@
-from app.persistence.db import Document, db
+from app.persistence.db import Document, db, ResultList
 from passlib.hash import argon2
 
 
@@ -35,33 +35,17 @@ class Post(Document):
         del data
         return post
 
-"""
-post = {
-        _id: <id>,
-        schema: <version-id>,
-        title: <post-title>,
-        username: <name>,
-        created: date,
-        tag: <type-tags>,
-        complex-rating: <rating-score>,
-        solved: boolean,
-        test_code: "py code ...",
-        solution_codes: [
-                        {
-                            soutlion_id: <post_id>+<solution_id>,
-                            username: <name>,
-                            submitted: Date(),
-                            ranking: <ranking>,
-                            solution_code: "py code ..."
-                        }
-                        ]
-        comments: [
-                    {
-                            username: <name>,
-                            coment: <text>,
-                            submitted: Date()
-                    }
-                ]
-        }
-"""
+    @classmethod
+    def text_search(cls, search, limit):
+        return ResultList(cls(item) for item in cls.collection.find(
+            { "$text": { "$search": search }}, { "score": { "$meta": "textScore"}})
+            .sort( "score", -1 ).limit(limit))
+
+    @classmethod
+    def iterate(cls, skip, limit):
+        return ResultList(cls(item) for item in cls.collection.find().skip(skip).limit(limit))
+
+    @classmethod
+    def latest(cls, limit):
+        return ResultList(cls(item) for item in cls.collection.find().sort('created', -1).limit(limit))
 

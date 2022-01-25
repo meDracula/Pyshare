@@ -79,12 +79,6 @@ class Document(dict, ABC):
         return ResultList(cls(item) for item in cls.collection.find(kwargs))
 
     @classmethod
-    def find_explain(cls, **kwargs):
-        return cls.collection.find(kwargs).explain()['executionStats']
-        #return cls.collection.find(kwargs).explain()['queryPlanner']
-
-
-    @classmethod
     def delete(cls, **kwargs):
         cls.collection.delete_many(kwargs)
 
