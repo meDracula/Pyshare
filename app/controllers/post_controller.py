@@ -14,3 +14,5 @@ def iterate_posts(step: int, limit=10):
 def latest_posts(limit=10):
     return post_repo.latest_posts(limit)
 
+def delete_posts(title: str):
+    return post_repo.delete_posts(title=title)

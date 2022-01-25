@@ -14,3 +14,5 @@ def iterate_posts(skip:int, limit:int):
 def latest_posts(limit: int):
     return Post.latest(limit).full_or_none()
 
+def delete_posts(**kwargs):
+    return Post.delete(**kwargs)
