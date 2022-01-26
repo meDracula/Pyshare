@@ -8,6 +8,16 @@ def index():
     # if user is login then redirect to account page
     return redirect('home')
 
+@bp_open.get('/login')
+def login_get():
+    return render_template('login.html')
+
+@bp_open.post('/login')
+def login_post():
+    data = request.form
+    print(data)
+    return render_template('login.html')
+
 @bp_open.get('/home')
 def home():
     return render_template('home.html')
