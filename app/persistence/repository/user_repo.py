@@ -2,26 +2,39 @@ from app.persistence.models import User
 from datetime import datetime
 
 
-def get_all_users():
-    return User.all()
+def create_new_user(username:str, email:str, password:str):
+    user = User.create(password, username=username, email=email, created=datetime.now())
+    return user.save().acknowledged
+
 
 def get_users(**kwargs):
     return User.find(**kwargs)
 
-def set_password(user, password:str):
-    user.password = password
 
+def get_user(user_identifier):
+    return User.find_parallel(username=user_identifier, email=user_identifier).first_or_none()
+
+
+def delete_users(**kwargs):
+    return User.delete(**kwargs)
+
+
+def login_user(user_identifier , password):
+    user = User.find_parallel(username=user_identifier, email=user_identifier).first_or_none()
+    if user is not None and User.verify_password(user.__dict__['password'], password):
+        return True
+    return False
+
+
+# Repository deprecation block --->
 def verify_user(username, email):
     if User.find(username=username, email=email).first_or_none() is not None:
         return True
     return False
 
-def create_new_user(username:str, email:str, password:str):
-    user = User.create(password, username=username, email=email, created=datetime.now())
-    return user.save().acknowledged
-
 def verify_password(password_hash: str, password:str) -> bool:
     return User.verify_password( password_hash, password)
 
-def delete_users(**kwargs):
-    return User.delete(**kwargs)
+def get_all_users():
+    return User.all()
+# <----
