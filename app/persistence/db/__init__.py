@@ -21,7 +21,8 @@ def init_db(app, show=False):
     if show:
         print(*[f"{cat} {status}\n" for cat, status in client.server_info().items()])
         print("Client: ", client)
-        print("Databases:", client.list_database_names(), f"{database}:", database in client.list_database_names())
+        print("Databases:", client.list_database_names())
+        print(f"{database} is a database:", database in client.list_database_names())
 
 
 class ResultList(list):
@@ -77,6 +78,11 @@ class Document(dict, ABC):
     @classmethod
     def find(cls, **kwargs):
         return ResultList(cls(item) for item in cls.collection.find(kwargs))
+
+    @classmethod
+    def find_parallel(cls, **kwargs):
+        arr = [{key:kwargs[key]} for key in kwargs]
+        return ResultList(cls(item) for item in cls.collection.find({ "$or": arr }))
 
     @classmethod
     def delete(cls, **kwargs):
