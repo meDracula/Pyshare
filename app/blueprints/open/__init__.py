@@ -25,8 +25,27 @@ def home():
     return render_template('home.html')
 
 @bp_open.get('/posts')
-def posters():
-    return render_template("posters.html")
+def posters_get():
+    from app.controllers.post_controller import latest_posts
+    latest = latest_posts()
+    sort_type = "Latest"
+    return render_template("posters.html", sort_type=sort_type, posts=latest)
+
+@bp_open.post('/posts')
+def posters_post():
+    from app.controllers.post_controller import search_title, latest_posts
+
+    latest = request.form.get('latest')
+    search_text = request.form.get('search')
+
+    if search_text is not None and latest is None:
+        posts = search_title(search_text)
+        sort_type = "Search"
+    else:
+        posts = latest_posts()
+        sort_type = "Latest"
+
+    return render_template("posters.html", sort_type=sort_type, posts=posts)
 
 @bp_open.get('/sign-up')
 def signup_get():
