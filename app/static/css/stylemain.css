@@ -38,3 +38,43 @@ main{
 	text-align: center;
 }
 
+/* Posts */
+.post_list {
+	margin: 10px;
+}
+
+.post_list .filters {
+	display: inline;
+	padding: 5px;
+}
+
+.post_list .filters #latest {
+	background-color: #3dc4c2;
+}
+
+.post_list ul{
+	list-style-type: none;
+	padding-left: 0px;
+}
+
+.post_list #search_icon{
+	color: #000;
+	background-color: #3dc4c2;
+	cursor: pointer;
+}
+
+.posts {
+	background: rgba(78, 78, 78, 0.25);
+	margin-top: 5px;
+}
+
+.posts span {
+	display: block;
+}
+
+.posts a {
+	color: #fff;
+}
+.posts a:hover {
+	color: #5c4696;
+}
