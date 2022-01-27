@@ -14,6 +14,9 @@ class User(Document):
     def is_anonymous(self):
         return False
 
+    def get_id(self):
+        return self.username
+
     @classmethod
     def create(cls, password, **data):
         user = User(data)
