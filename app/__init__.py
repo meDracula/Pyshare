@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 from flask import Flask
+from flask_login import LoginManager
 from app.persistence.db import init_db
 
 
@@ -9,8 +10,13 @@ def create_app():
 
     init_db(app)
 
-   # from app.auth import auth
-    #app.register_blueprint(auth, url_prefix="/")
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        from app.controllers.user_controller import get_profile
+        return get_profile(user_id)
 
     from app.blueprints.admin import bp_admin
     app.register_blueprint(bp_admin)

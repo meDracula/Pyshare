@@ -5,6 +5,15 @@ from passlib.hash import argon2
 class User(Document):
     collection = db.users
 
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
     @classmethod
     def create(cls, password, **data):
         user = User(data)
