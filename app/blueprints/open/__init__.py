@@ -15,6 +15,8 @@ def login_get():
 @bp_open.post('/login')
 def login_post():
     data = request.form
+    #email = request.form.get('email')
+    #password = request.form.get('password3')
     print(data)
     return render_template('login.html')
 
