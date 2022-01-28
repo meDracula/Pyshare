@@ -2,30 +2,35 @@
 {% block title %}Pyshare{% endblock %}
 {% block content %}
 	<h1 class="center">{{ post.title }}</h1>
-	<span id="author" class="center author"><b>By: {{ post.username }}</b><br/><i>Created {{ post.created.strftime("%Y-%m-%d %H:%M") }}</i></span>
+	<span id="author" class="center author">
+		<b>By: {{ post.username }}</b><br/>
+		<i>Created {{ post.created.strftime("%Y-%m-%d %H:%M") }}</i>
+	</span>
 	<article>
 		<h2>Description</h2>
 		<p>{{ post.description }}</p>
-		<code>
-			print("Hello World!")
-			{{ post.problem_code }}
-		</code>
+		<pre>
+			<code>
+				{{ post.problem_code }}
+			</code>
+		</pre>
 	</article>
 	{% if post.solution_codes|length > 0 %}
 		<div class="solutioncode">
 			<h2>Solutions</h2>
 			{% for solution in post.solution_codes %}
 				<span class="author"><b>By: {{ solution.username }}</b></span>
-				<code>
-					{{ solution.solution_code }}
-				</code>
+				<pre>
+					<code>
+						{{ solution.solution_code }}
+					</code>
+				</pre>
 			{% endfor %}
 		</div>
 	{% endif %}
 	{% if current_user.is_authenticated %}
 		<form method="Post">
-			<button type="submit">Try!</button>
+			<button type="submit" name="try" value="True">Try!</button>
 		</form>
 	{% endif %}
 {% endblock %}
-

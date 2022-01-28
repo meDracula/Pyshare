@@ -60,13 +60,16 @@ def thepost_get(title):
     post = get_post(title)
     if post is None:
         abort(404)
-    print(current_user,"ID:", current_user.get_id(), "user is:", current_user.is_authenticated)
     return render_template("thepost.html", post=post, current_user=current_user)
 
 
 @bp_open.post('/posts/<title>')
+@login_required
 def thepost_post(title):
-    pass
+    user_try = request.form.get('try')
+    if user_try:
+        print("Redirecting...")     # THIS line will be replaced by solution page
+    return redirect(url_for("bp_open.thepost_get", title=title))
 
 
 @bp_open.get('/sign-up')

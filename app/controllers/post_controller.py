@@ -1,8 +1,8 @@
 from app.persistence.repository import post_repo
 from datetime import datetime
 
-def create_new_post(title:str, username:str, description:str, test_code):
-    return post_repo.create_new_post(title=title, username=username, description=description, test_code=test_code)
+def create_new_post(title:str, username:str, description:str, problem_code):
+    return post_repo.create_new_post(title, username, description, problem_code)
 
 def search_title(title: str):
     return post_repo.search_post_title(title)
