@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask_login import current_user
 from werkzeug.security import generate_password_hash
 
 bp_open = Blueprint('bp_open', __name__)
@@ -14,12 +15,12 @@ def login_get():
 
 @bp_open.post('/login')
 def login_post():
-    from app.controllers.user_controller import login_user
+    from app.controllers.user_controller import the_login_user
 
     user_identifier = request.form.get('identifier')
     password = request.form.get('password')
 
-    if login_user(user_identifier, password):
+    if the_login_user(user_identifier, password):
         return redirect('home')
     else:
         flash('Wrong Username/Email or password!')

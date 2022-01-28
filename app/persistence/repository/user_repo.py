@@ -20,7 +20,7 @@ def delete_users(**kwargs):
     return User.delete(**kwargs)
 
 
-def login_user(user_identifier, password):
+def the_login_user(user_identifier, password):
     user = User.find_parallel(username=user_identifier, email=user_identifier).first_or_none()
     if user is not None and User.verify_password(user.__dict__['password'], password):
         login_user(user, user.__dict__['password'])
