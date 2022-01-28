@@ -18,3 +18,5 @@ def latest_posts(limit=10):
 def delete_posts(title: str):
     return post_repo.delete_posts(title=title)
 
+def get_post(title: str):
+    return post_repo.get_post(title)

@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
+from flask_login import current_user, login_required
 from werkzeug.security import generate_password_hash
 
 bp_open = Blueprint('bp_open', __name__)
@@ -14,12 +15,12 @@ def login_get():
 
 @bp_open.post('/login')
 def login_post():
-    from app.controllers.user_controller import login_user
+    from app.controllers.user_controller import the_login_user
 
     user_identifier = request.form.get('identifier')
     password = request.form.get('password')
 
-    if login_user(user_identifier, password):
+    if the_login_user(user_identifier, password):
         return redirect('home')
     else:
         flash('Wrong Username/Email or password!')
@@ -51,6 +52,21 @@ def posters_post():
         sort_type = "Latest"
 
     return render_template("posters.html", sort_type=sort_type, posts=posts)
+
+
+@bp_open.get('/posts/<title>')
+def thepost_get(title):
+    from app.controllers.post_controller import get_post
+    post = get_post(title)
+    if post is None:
+        abort(404)
+    print(current_user,"ID:", current_user.get_id(), "user is:", current_user.is_authenticated)
+    return render_template("thepost.html", post=post, current_user=current_user)
+
+
+@bp_open.post('/posts/<title>')
+def thepost_post(title):
+    pass
 
 
 @bp_open.get('/sign-up')

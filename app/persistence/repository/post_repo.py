@@ -16,3 +16,6 @@ def latest_posts(limit: int):
 
 def delete_posts(**kwargs):
     return Post.delete(**kwargs)
+
+def get_post(title):
+    return Post.find(title=title).first_or_none()
