@@ -1,23 +1,18 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
 {% block content %}
-    <form method="POST">
-        <h1 align="center">Login</h1>
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
-        </div>
-        <br >
-        <div class="form-group">
-          <label for="password3">Password</label>
-          <input type="password" class="form-control" id="password3" name="password" placeholder="Enter password">
-        </div>
-        <br />
-        <button type="submit">Submit</button>
-      </form>
-
-    <div class="signup_link">
-    Not a member? <a href="/sign-up">Sign-up</a>
-    </div>
-
+	<h1 class="center">Login</h1>
+	<script src="{{ url_for('static', filename='js/basic.js') }}" ></script>
+	<form method="POST">
+		<label for="identifier" id="user_identifier">Username</label>
+		<input type="text" name="identifier" placeholder="Enter username"><br/>
+		<label for="password">Password</label>
+		<input type="password" name="password" placeholder="Enter password"><br/>
+		<button type="submit">Submit</button>
+	</form>
+	<span>Would you like to switch to </span>
+	<label for="username_or_email">Email
+		<input type="checkbox" name="username" id="username_or_email" onchange="switch_username_email()">
+	</label><br/>
+	<span>Not a member?<span> <a href="/sign-up">Sign-up</a>
 {% endblock %}

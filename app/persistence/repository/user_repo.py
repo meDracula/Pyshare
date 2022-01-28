@@ -1,4 +1,5 @@
 from app.persistence.models import User
+from flask_login import login_user
 from datetime import datetime
 
 
@@ -22,7 +23,9 @@ def delete_users(**kwargs):
 def login_user(user_identifier, password):
     user = User.find_parallel(username=user_identifier, email=user_identifier).first_or_none()
     if user is not None and User.verify_password(user.__dict__['password'], password):
-        return True
+        login_user(user, user.__dict__['password'])
+        user.__dict__['last_active'] = datetime.now()
+        return user.save().acknowledged
     return False
 
 
