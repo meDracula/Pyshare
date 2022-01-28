@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
 {% block content %}
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+				{{ message }}
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+
 	<h1 class="center">Login</h1>
 	<script src="{{ url_for('static', filename='js/basic.js') }}" ></script>
 	<form method="POST">

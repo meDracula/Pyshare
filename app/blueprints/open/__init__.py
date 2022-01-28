@@ -52,6 +52,7 @@ def posters_post():
 
     return render_template("posters.html", sort_type=sort_type, posts=posts)
 
+
 @bp_open.get('/sign-up')
 def signup_get():
     return render_template('signup.html')
