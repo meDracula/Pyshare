@@ -13,10 +13,14 @@
 			<nav class="navsection">
 				<a id="pyshare" href="/">Pyshare</a>
 				<a id="home" href="/">Home </a>
-				<a id="login" href="/login">Login</a>
-				<a id="signUp" href="/sign-up">Sign-up</a>
-				<a id="logout" href="">Logout</a>
-				<a id="posts" href="/posts">Posts</a>
+                <a id="posts" href="/posts">Posts</a>
+				{% if current_user.is_authenticated %}
+                    <a id="account" href="">Account</a>
+                    <a id="logout" href="/logout">Logout</a>
+                {% else %}
+                    <a id="login" href="/login">Login</a>
+                    <a id="signUp" href="/sign-up">Sign-up</a>
+                {% endif %}
 			</nav>
 		</header>
 		<main>
