@@ -1,8 +1,8 @@
 from app.persistence.models import Post
 from datetime import datetime
 
-def create_new_post(title, username, description, problem_code):
-    post = Post.create(title=title, username=username, description=description, problem_code=problem_code, created=datetime.now())
+def create_new_post(title, username, description, test_code):
+    post = Post.create(title=title, username=username, description=description, test_code=test_code, created=datetime.now())
     return post.save().acknowledged
 
 def search_post_title(title, limit=10):
@@ -19,3 +19,6 @@ def delete_posts(**kwargs):
 
 def get_post(title):
     return Post.find(title=title).first_or_none()
+
+def post_solution(username, solution_code, post):
+    return post.post_solution(username, datetime.now(), solution_code)

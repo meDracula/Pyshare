@@ -68,7 +68,7 @@ def thepost_get(title):
 def thepost_post(title):
     user_try = request.form.get('try')
     if user_try:
-        print("Redirecting...")     # THIS line will be replaced by solution page
+        return redirect(url_for("bp_user.solve_thepost", title=title))
     return redirect(url_for("bp_open.thepost_get", title=title))
 
 
