@@ -28,16 +28,3 @@ def the_login_user(user_identifier, password):
         return user.save().acknowledged
     return False
 
-
-# Repository deprecation block --->
-def verify_user(username, email):
-    if User.find(username=username, email=email).first_or_none() is not None:
-        return True
-    return False
-
-def verify_password(password_hash: str, password:str) -> bool:
-    return User.verify_password(password_hash, password)
-
-def get_all_users():
-    return User.all()
-# <----
