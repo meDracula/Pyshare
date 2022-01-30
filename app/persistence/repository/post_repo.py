@@ -22,3 +22,7 @@ def get_post(title):
 
 def post_solution(username, solution_code, post):
     return post.post_solution(username, datetime.now(), solution_code)
+
+def submit_comment(post, username, text):
+    post.add_comment(username, text, datetime.now())
+

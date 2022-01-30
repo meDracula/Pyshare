@@ -63,6 +63,9 @@ class Post(Document):
 
     def post_solution(self, username, created, solution_code):
         solve_dict = {'solution_id': len(self.solution_codes),  'username': username, 'submitted':created, 'solution_code': solution_code }
-        self.__dict__['solution_codes'].append(solve_dict)
+        self.solution_codes.append(solve_dict)
         self.save()
 
+    def add_comment(self, username, text, submitted):
+        self.comments.append({'username': username, 'comment': text, 'submitted': submitted})
+        self.save()

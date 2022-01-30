@@ -2,6 +2,7 @@
 {% block title %}Pyshare{% endblock %}
 {% block content %}
 	<h1 class="center">{{ post.title }}</h1>
+	<script src="{{ url_for('static', filename='js/comments.js') }}" ></script>
 	<span id="author" class="center author">
 		<b>By: {{ post.username }}</b><br/>
 		<i>Created {{ post.created.strftime("%Y-%m-%d %H:%M") }}</i>
@@ -15,6 +16,23 @@
 			</code>
 		</pre>
 	</article>
+	{% if post.comments|length > 0 %}
+		{% for comment in post.comments %}
+			<span class="author"><b>By: {{ comment.username }}</b></span>
+			{{ comment.comment}}
+			<br/>
+		{% endfor %}
+	{% endif %}
+	{% if current_user.is_authenticated %}
+		<button type="button" onclick="commentShow()">Write Comment</button>
+		<form method="Post" id="comments">
+			<fieldset>
+				<label for="commenttext">Write:</label>
+				<input type="text" name="commenttext" required></input>
+				<button type="submit" name="Post">Submit</button>
+			</fieldset>
+		</form>
+	{% endif %}
 	{% if post.solution_codes|length > 0 %}
 		<div class="solutioncode">
 			<h2>Solutions</h2>

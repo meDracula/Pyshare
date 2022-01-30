@@ -66,7 +66,11 @@ def thepost_get(title):
 @bp_open.post('/posts/<title>')
 @login_required
 def thepost_post(title):
+    from app.controllers.post_controller import submit_comment
+    comment = request.form.get('commenttext')
     user_try = request.form.get('try')
+    if comment:
+        submit_comment(title, current_user.username, comment)
     if user_try:
         return redirect(url_for("bp_user.solve_thepost", title=title))
     return redirect(url_for("bp_open.thepost_get", title=title))

@@ -23,3 +23,7 @@ def get_post(title: str):
 
 def post_solution(username:str, solution_code, post):
     return post_repo.post_solution(username, solution_code, post)
+
+def submit_comment(title:str, username: str, text: str):
+    post = post_repo.get_post(title)
+    return post_repo.submit_comment(post, username, text)
