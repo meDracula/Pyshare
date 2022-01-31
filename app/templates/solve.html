@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title%}Solve{% endblock %}
+{% block content %}
+	<h1>Solve {{ post.title }}</h1>
+	<p>{{ post.description }}</p>
+	<pre>
+		<code>
+			{{ post.test_code }}
+		</code>
+	</pre>
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+				{{ message }}
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+	<form method="Post">
+		<textarea name="solve_text" cols="120" rows="15" required>{{ solve_text }}</textarea>
+		<br/>
+		<button type="submit" name="test">Test</button>
+		{% if color %}
+			<button type="submit" name="final" value="true">Submit</button>
+		{% endif %}
+	</from>
+{% endblock %}
+
