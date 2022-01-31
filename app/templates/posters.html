@@ -4,6 +4,11 @@
 	<h1>Posts</h1>
 	<div class="post_list">
 		<h2>{{ sort_type }}</h2>
+		{% if current_user.is_authenticated %}
+			<form method="POST">
+				<button type="submit" name="create" value="true">Create Post</button>
+			</form>
+		{% endif %}
 		<span>Search Parameters:</span>
 			<form method="POST" class="filters">
 				<button id="latest" type="submit" value="true" name="latest"><i>Latest</i></button>

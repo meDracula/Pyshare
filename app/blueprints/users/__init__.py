@@ -50,3 +50,29 @@ def solve_thepost_post(title):
         return redirect(url_for('bp_open.thepost_get', title=title))
     return redirect(url_for('bp_user.solve_thepost', title=title))
 
+@bp_user.get('/posts/create')
+@login_required
+def create_post():
+    return render_template('createpost.html')
+
+@bp_user.post('/posts/create')
+@login_required
+def create_post_post():
+    from app.controllers.post_controller import create_new_post
+    #title, username, description, test_code
+
+    title = request.form.get('title')
+    description = request.form.get('description')
+    test_code = request.form.get('test_code')
+
+    if description == 'Description':
+        description = ""
+
+    res = create_new_post( title, current_user.username, description, test_code)
+    if res == 'title':
+        flash(f'Your {res} is not unique!')
+        return redirect(url_for('bp_user.create_post'))
+    else:
+        flash('Your Post have been created')
+        return redirect(url_for('bp_open.posters_get'))
+

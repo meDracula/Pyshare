@@ -35,14 +35,18 @@ def posters_get():
     from app.controllers.post_controller import latest_posts
     latest = latest_posts()
     sort_type = "Latest"
-    return render_template("posters.html", sort_type=sort_type, posts=latest)
+    return render_template("posters.html", current_user=current_user, sort_type=sort_type, posts=latest)
 
 @bp_open.post('/posts')
 def posters_post():
     from app.controllers.post_controller import search_title, latest_posts
 
+    create = request.form.get('create')
     latest = request.form.get('latest')
     search_text = request.form.get('search')
+
+    if create:
+        return redirect(url_for('bp_user.create_post'))
 
     if search_text is not None and latest is None:
         posts = search_title(search_text)
