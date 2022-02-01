@@ -32,14 +32,20 @@ def home():
 
 @bp_open.get('/posts')
 def posters_get():
-    from app.controllers.post_controller import latest_posts
-    latest = latest_posts()
-    sort_type = "Latest"
-    return render_template("posters.html", current_user=current_user, sort_type=sort_type, posts=latest)
+    from app.controllers.post_controller import get_posts
+
+    sort_type = request.args.get('sort_type', 'latest', type=str)
+    search_text = request.args.get('search_text', '', type=str)
+    page = request.args.get('page', 0, type=int)
+
+    posts = get_posts(sort_type, page, search=search_text)
+    return render_template("posters.html", current_user=current_user, sort_type=sort_type, posts=posts, pagecount=page, search_text=search_text)
 
 @bp_open.post('/posts')
 def posters_post():
-    from app.controllers.post_controller import search_title, latest_posts
+    from app.controllers.post_controller import get_posts
+
+    page = request.args.get('page', 0, type=int)
 
     create = request.form.get('create')
     latest = request.form.get('latest')
@@ -48,14 +54,8 @@ def posters_post():
     if create:
         return redirect(url_for('bp_user.create_post'))
 
-    if search_text is not None and latest is None:
-        posts = search_title(search_text)
-        sort_type = "Search"
-    else:
-        posts = latest_posts()
-        sort_type = "Latest"
-
-    return render_template("posters.html", sort_type=sort_type, posts=posts)
+    sort_type = "search" if search_text is not None and latest is None else "latest"
+    return redirect(url_for('bp_open.posters_get', sort_type=sort_type, search_text=search_text, page=page))
 
 
 @bp_open.get('/posts/<title>')

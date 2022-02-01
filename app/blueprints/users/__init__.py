@@ -48,7 +48,8 @@ def solve_thepost_post(title):
     if submit:
         post_solution(current_user.username, solve_text, post)
         return redirect(url_for('bp_open.thepost_get', title=title))
-    return redirect(url_for('bp_user.solve_thepost', title=title))
+    #return redirect(url_for('bp_user.solve_thepost', title=title))
+    return render_template('solve.html', post=post, solve_text=solve_text, color=color)
 
 @bp_user.get('/posts/create')
 @login_required
@@ -59,7 +60,6 @@ def create_post():
 @login_required
 def create_post_post():
     from app.controllers.post_controller import create_new_post
-    #title, username, description, test_code
 
     title = request.form.get('title')
     description = request.form.get('description')

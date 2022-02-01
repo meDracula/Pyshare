@@ -32,5 +32,13 @@
 
 		</ul>
 	</div>
+	<div class="center">
+		<span>
+		{% if pagecount > 0 %}
+			<a href="{{ url_for('bp_open.posters_get', sort_type=sort_type, search_text=search_text, page=pagecount-1 ) }}">Prev</a>
+		{% endif %}
+		<a href="{{ url_for('bp_open.posters_get', sort_type=sort_type, search_text=search_text, page=pagecount+1) }}">Next</a>
+		</span>
+	</div>
 {% endblock %}
 

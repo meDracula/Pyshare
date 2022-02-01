@@ -48,18 +48,14 @@ class Post(Document):
         return post
 
     @classmethod
-    def text_search(cls, search, limit):
+    def text_search(cls, search, skip, limit):
         return ResultList(cls(item) for item in cls.collection.find(
             { "$text": { "$search": search }}, { "score": { "$meta": "textScore"}})
-            .sort( "score", -1 ).limit(limit))
+            .sort( "score", -1 ).skip(skip).limit(limit))
 
     @classmethod
-    def iterate(cls, skip, limit):
-        return ResultList(cls(item) for item in cls.collection.find().skip(skip).limit(limit))
-
-    @classmethod
-    def latest(cls, limit):
-        return ResultList(cls(item) for item in cls.collection.find().sort('created', -1).limit(limit))
+    def latest(cls, skip, limit):
+        return ResultList(cls(item) for item in cls.collection.find().sort('created', -1).skip(skip).limit(limit))
 
     def post_solution(self, username, created, solution_code):
         solve_dict = {'solution_id': len(self.solution_codes),  'username': username, 'submitted':created, 'solution_code': solution_code }
@@ -69,3 +65,4 @@ class Post(Document):
     def add_comment(self, username, text, submitted):
         self.comments.append({'username': username, 'comment': text, 'submitted': submitted})
         self.save()
+

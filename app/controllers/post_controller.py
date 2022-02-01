@@ -7,13 +7,12 @@ def create_new_post(title:str, username:str, description:str, test_code):
 def search_title(title: str):
     return post_repo.search_post_title(title)
 
-def iterate_posts(step: int, limit=10):
-    assert isinstance(limit, int), "limit must be a INT"
-    step *= 10
-    return post_repo.iterate_posts(step, limit)
-
-def latest_posts(limit=10):
-    return post_repo.latest_posts(limit)
+def get_posts(sort_type: str, skip: int, limit=10, search=""):
+    skip *= limit
+    if sort_type == 'latest':
+        return post_repo.latest_posts(skip, limit)
+    elif sort_type == 'search':
+        return post_repo.search_post_title(search, skip, limit)
 
 def delete_posts(title: str):
     return post_repo.delete_posts(title=title)
@@ -27,3 +26,4 @@ def post_solution(username:str, solution_code, post):
 def submit_comment(title:str, username: str, text: str):
     post = post_repo.get_post(title)
     return post_repo.submit_comment(post, username, text)
+
