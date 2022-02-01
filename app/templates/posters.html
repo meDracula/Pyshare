@@ -4,6 +4,11 @@
 	<h1>Posts</h1>
 	<div class="post_list">
 		<h2>{{ sort_type }}</h2>
+		{% if current_user.is_authenticated %}
+			<form method="POST">
+				<button type="submit" name="create" value="true">Create Post</button>
+			</form>
+		{% endif %}
 		<span>Search Parameters:</span>
 			<form method="POST" class="filters">
 				<button id="latest" type="submit" value="true" name="latest"><i>Latest</i></button>
@@ -16,9 +21,9 @@
 			{% if posts %}
 				{% for post in posts %}
 				<li class="posts" >
-					<h3><a href="">{{ post.__dict__['title'] }}</a></h3>
-					<span id="username">By: {{ post.__dict__['username'] }}</span>
-					<span id="created">Created: {{  post.__dict__['created'].strftime("%Y-%m-%d %H:%M") }}</span>
+					<h3><a href="/posts/{{ post.title }}">{{ post.title }}</a></h3>
+					<span id="username">By: {{ post.username }}</span>
+					<span id="created">Created: {{  post.created.strftime("%Y-%m-%d %H:%M") }}</span>
 				</li>
 				{% endfor %}
 			{% else %}
@@ -26,6 +31,14 @@
 			{% endif %}
 
 		</ul>
+	</div>
+	<div class="center">
+		<span>
+		{% if pagecount > 0 %}
+			<a href="{{ url_for('bp_open.posters_get', sort_type=sort_type, search_text=search_text, page=pagecount-1 ) }}">Prev</a>
+		{% endif %}
+		<a href="{{ url_for('bp_open.posters_get', sort_type=sort_type, search_text=search_text, page=pagecount+1) }}">Next</a>
+		</span>
 	</div>
 {% endblock %}
 

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Pyshare{% endblock %}
+{% block content %}
+	<h1 class="center">{{ post.title }}</h1>
+	<script src="{{ url_for('static', filename='js/comments.js') }}" ></script>
+	<span id="author" class="center author">
+		<b>By: {{ post.username }}</b><br/>
+		<i>Created {{ post.created.strftime("%Y-%m-%d %H:%M") }}</i>
+	</span>
+	<article>
+		<h2>Description</h2>
+		<p>{{ post.description }}</p>
+		<pre>
+			<code>
+				{{ post.test_code }}
+			</code>
+		</pre>
+	</article>
+	{% if post.comments|length > 0 %}
+		{% for comment in post.comments %}
+			<span class="author"><b>By: {{ comment.username }}</b></span>
+			{{ comment.comment}}
+			<br/>
+		{% endfor %}
+	{% endif %}
+	{% if current_user.is_authenticated %}
+		<button type="button" onclick="commentShow()">Write Comment</button>
+		<form method="Post" id="comments">
+			<fieldset>
+				<label for="commenttext">Write:</label>
+				<input type="text" name="commenttext" required></input>
+				<button type="submit" name="Post">Submit</button>
+			</fieldset>
+		</form>
+	{% endif %}
+	{% if post.solution_codes|length > 0 %}
+		<div class="solutioncode">
+			<h2>Solutions</h2>
+			{% for solution in post.solution_codes %}
+				<span class="author"><b>By: {{ solution.username }}</b></span>
+				<pre>
+					<code>
+						{{ solution.solution_code }}
+					</code>
+				</pre>
+			{% endfor %}
+		</div>
+	{% endif %}
+	{% if current_user.is_authenticated %}
+		<form method="Post">
+			<button type="submit" name="try" value="True">Try!</button>
+		</form>
+	{% endif %}
+{% endblock %}

@@ -79,3 +79,7 @@ main{
 	color: #5c4696;
 }
 
+/* The Posts */
+#comments {
+	visibility: hidden;
+}
