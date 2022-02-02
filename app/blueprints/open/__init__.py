@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
 from flask_login import current_user, login_required
-from werkzeug.security import generate_password_hash
 
 bp_open = Blueprint('bp_open', __name__)
 
@@ -80,42 +79,23 @@ def thepost_post(title):
     return redirect(url_for("bp_open.thepost_get", title=title))
 
 
-@bp_open.get('/sign-up')
+@bp_open.get('/signup')
 def signup_get():
     return render_template('signup.html')
 
 @bp_open.post('/signup')
 def signup_post():
-    username = request.form.get("user_name")
-    first_name = request.form.get('first_name')
-    last_name = request.form.get('last_name')
+    from app.controllers.user_controller import create_new_user
+
+    username = request.form.get("username")
     email = request.form.get('email')
     password1 = request.form.get('password1')
     password2 = request.form.get('password2')
 
-    from app.persistence.models import User
-    user = User.find(email=email).first_or_none()
-    if user is not None:
-        flash('Email already exists.', category='error')
-    elif len(email) < 4:
-        flash('Email must be greater than 3 characters.', category='error')
-    elif len(username) < 4:
-        flash('Username must be greater than 6 characters.', category='error')
-    elif len(first_name) < 2:
-        flash('First name must be greater than 1 character.', category='error')
-    elif password1 != password2:
-        flash('Passwords don\'t match.', category='error')
-    elif len(password1) < 7:
-        flash('Password must be at least 7 characters.', category='error')
+    result = create_new_user(username, email, password1)
+    if result != True:
+        flash(f"Not Unique {result}")
         return redirect(url_for('bp_open.signup_get'))
+    else:
+        return redirect(url_for('bp_open.login_get'))
 
-    user = User(
-        {
-            'first_name': first_name,
-            'last_name': last_name,
-            'email': email,
-            'password': generate_password_hash(password1)
-        }
-    )
-    user.save()
-    return redirect(url_for('bp_open.login'))
