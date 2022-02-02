@@ -15,11 +15,11 @@
 				<a id="home" href="/">Home </a>
 				<a id="posts" href="/posts">Posts</a>
 				{% if current_user.is_authenticated %}
-					<a id="account" href="">Account</a>
+					<a id="account" href="/account">Account</a>
 					<a id="logout" href="/logout">Logout</a>
 				{% else %}
 					<a id="login" href="/login">Login</a>
-					<a id="signUp" href="/sign-up">Sign-up</a>
+					<a id="signUp" href="/signup">Sign-up</a>
 				{% endif %}
 			</nav>
 		</header>
