@@ -1,5 +1,5 @@
 from app.persistence.models import User
-from flask_login import login_user
+from flask_login import login_user, logout_user, current_user
 from datetime import datetime
 
 
@@ -27,4 +27,9 @@ def the_login_user(user_identifier, password):
         user.__dict__['last_active'] = datetime.now()
         return user.save().acknowledged
     return False
+
+def logout():
+    current_user.__dict__['last_active'] = datetime.now()
+    current_user.save().acknowledged
+    logout_user()
 
