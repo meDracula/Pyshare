@@ -75,7 +75,7 @@ def thepost_post(title):
     if comment:
         submit_comment(title, current_user.username, comment)
     if user_try:
-        return redirect(url_for("bp_user.solve_thepost", title=title))
+        return redirect(url_for("bp_user.solve_thepost_get", title=title))
     return redirect(url_for("bp_open.thepost_get", title=title))
 
 
