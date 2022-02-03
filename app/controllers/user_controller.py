@@ -5,8 +5,8 @@ def create_new_user(username:str, email:str, password:str):
     return user_repo.create_new_user(username, email, password)
 
 
-def the_login_user(user_identifier, password: str) -> bool:
-    return user_repo.the_login_user(user_identifier, password)
+def login(user_identifier, password: str) -> bool:
+    return user_repo.login(user_identifier, password)
 
 
 def get_profile(user_identifier: str):
@@ -20,3 +20,5 @@ def search_users(**kwargs):
 def delete_user(user_identifier):
     return user_repo.delete_users()
 
+def logout_user() -> bool:
+    return user_repo.logout()
