@@ -14,12 +14,12 @@ def login_get():
 
 @bp_open.post('/login')
 def login_post():
-    from app.controllers.user_controller import the_login_user
+    from app.controllers.user_controller import login
 
     user_identifier = request.form.get('identifier')
     password = request.form.get('password')
 
-    if the_login_user(user_identifier, password):
+    if login(user_identifier, password):
         return redirect('home')
     else:
         flash('Wrong Username/Email or password!')
