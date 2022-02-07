@@ -6,8 +6,6 @@ services:
     build:
       context: .
       dockerfile: "./flask/Dockerfile"
-    ports:
-      - 8800:8800
     depends_on:
       - pyshare_mongo
 
@@ -26,8 +24,6 @@ services:
     build:
       context: .
       dockerfile: "./testit/Dockerfile"
-    ports:
-      - 8090:50000
     depends_on:
       - pyshare_flask
 
