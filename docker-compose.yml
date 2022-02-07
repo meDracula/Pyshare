@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  pyshare_flask:
+    container_name: "pyshare_flask"
+    build:
+      context: .
+      dockerfile: "./flask/Dockerfile"
+    ports:
+      - 8800:8800
+    depends_on:
+      - pyshare_mongo
+
+  pyshare_mongo:
+    container_name: "pyshare_mongo"
+    build:
+      context: .
+      dockerfile: "./mongo/Dockerfile"
+    cap_add:
+      - SYS_NICE
+    volumes:
+      - "./vol:/vol"
+
+  pyshare_testit:
+    container_name: "pyshare_testit"
+    build:
+      context: .
+      dockerfile: "./testit/Dockerfile"
+    ports:
+      - 8090:50000
+    depends_on:
+      - pyshare_flask
+
+  pyshare_nginx:
+    container_name: "pyshare_nginx"
+    build:
+      context: .
+      dockerfile: "./nginx/Dockerfile"
+    ports:
+      - 80:80
+    depends_on:
+      - pyshare_flask
+

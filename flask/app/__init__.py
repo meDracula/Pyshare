@@ -30,6 +30,5 @@ def create_app():
     return app
 
 
-if __name__ == '__main__':
-    load_dotenv()
-    create_app().run()
+load_dotenv()
+app = create_app()
