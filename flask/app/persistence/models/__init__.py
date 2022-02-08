@@ -19,9 +19,13 @@ class User(Document):
 
     @classmethod
     def create(cls, password, **data):
+        data = {'schema': 1, 'username': data['username'],
+                'email': data['email'], 'password': None,
+                'role': 'normie', 'badges': [], 'posts': [],
+                'solution_code': [], 'created': data['created'],
+                'last_active': ''}
         user = User(data)
         user.password = password
-        user.__dict__.update({'schema': 1, 'role': 'normie', 'last_active': data['created']})
         del password, data
         return user
 
