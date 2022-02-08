@@ -46,8 +46,12 @@ class Post(Document):
 
     @classmethod
     def create(cls, **data):
+        data = {'schema': 1, 'title': data['title'],
+                'username': data['username'], 'created': data['created'],
+                'description': data['description'], 'rating': 1,
+                'solved': False, 'test_code': data['test_code'],
+                'solution_codes': [], 'comments': []}
         post = Post(data)
-        post.__dict__.update({'solved': False, 'schema': 1, "solution_codes": [], "comments": []})
         del data
         return post
 
@@ -64,6 +68,7 @@ class Post(Document):
     def post_solution(self, username, created, solution_code):
         solve_dict = {'solution_id': len(self.solution_codes),  'username': username, 'submitted':created, 'solution_code': solution_code }
         self.solution_codes.append(solve_dict)
+        self.solved = True
         self.save()
 
     def add_comment(self, username, text, submitted):
