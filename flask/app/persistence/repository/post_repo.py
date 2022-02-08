@@ -2,8 +2,13 @@ from app.persistence.models import Post
 from datetime import datetime
 
 def create_new_post(title, username, description, test_code):
+    from app.persistence.repository.user_repo import append_posts
     post = Post.create(title=title, username=username, description=description, test_code=test_code, created=datetime.now())
-    return post.save().acknowledged
+    res = post.save().acknowledged
+    if res == True:
+        post = get_post(post.title)
+        return append_posts(post).acknowledged
+    return res
 
 
 def search_post_title(title:str, skip:int, limit:int):
@@ -23,7 +28,10 @@ def get_post(title):
 
 
 def post_solution(username, solution_code, post):
-    return post.post_solution(username, datetime.now(), solution_code)
+    from app.persistence.repository.user_repo import append_solution_code
+    post.post_solution(username, datetime.now(), solution_code)
+    post = get_post(post.title)
+    return append_solution_code(post).acknowledged
 
 
 def submit_comment(post, username, text):

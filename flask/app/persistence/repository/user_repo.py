@@ -33,3 +33,15 @@ def logout():
     current_user.save().acknowledged
     logout_user()
 
+def append_posts(post):
+    current_user.posts.append(post._id)
+    return current_user.save()
+
+def append_solution_code(post):
+    for codes in post.solution_codes:
+        if codes['username'] == current_user.username:
+            solution_id = codes['solution_id']
+            break
+    current_user.solution_code.append({'post_id':post._id, 'solution_id': solution_id})
+    return current_user.save()
+
