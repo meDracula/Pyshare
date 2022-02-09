@@ -46,7 +46,7 @@ class Post(Document):
 
     @classmethod
     def create(cls, **data):
-        data = {'schema': 1, 'title': data['title'],
+        data = {'schema': 1, 'title': data['title'], 'title_hash': data['title_hash'],
                 'username': data['username'], 'created': data['created'],
                 'description': data['description'], 'rating': 1,
                 'solved': False, 'test_code': data['test_code'],
