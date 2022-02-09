@@ -57,26 +57,27 @@ def posters_post():
     return redirect(url_for('bp_open.posters_get', sort_type=sort_type, search_text=search_text, page=page))
 
 
-@bp_open.get('/posts/<title>')
-def thepost_get(title):
-    from app.controllers.post_controller import get_post
-    post = get_post(title)
+@bp_open.get('/posts/<title_hash>')
+def thepost_get(title_hash):
+    from app.controllers.post_controller import get_post_hash
+    post = get_post_hash(title_hash)
     if post is None:
         abort(404)
     return render_template("thepost.html", post=post, current_user=current_user)
 
 
-@bp_open.post('/posts/<title>')
+@bp_open.post('/posts/<title_hash>')
 @login_required
-def thepost_post(title):
-    from app.controllers.post_controller import submit_comment
+def thepost_post(title_hash):
+    from app.controllers.post_controller import submit_comment, get_post_hash
     comment = request.form.get('commenttext')
     user_try = request.form.get('try')
+    post = get_post_hash(title_hash)
     if comment:
-        submit_comment(title, current_user.username, comment)
+        submit_comment(post, current_user.username, comment)
     if user_try:
-        return redirect(url_for("bp_user.solve_thepost_get", title=title))
-    return redirect(url_for("bp_open.thepost_get", title=title))
+        return redirect(url_for("bp_user.solve_thepost_get", title_hash=title_hash))
+    return redirect(url_for("bp_open.thepost_get", title_hash=title_hash))
 
 
 @bp_open.get('/signup')
