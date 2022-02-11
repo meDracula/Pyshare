@@ -23,7 +23,7 @@ body {
     font-weight: 500;
 }
 .box input[type = "text"],.box input[type = "password"]{
-    border:0;
+    border: 0;
     background: none;
     display: block;
     margin: 20px auto;
@@ -52,7 +52,7 @@ body {
     outline: none;
     color: white;
     border-radius: 24px;
-    transition: 0,25s;
+    transition: 0.25s;
     cursor: pointer;
 }
 .box input[type = submit]:hover{
