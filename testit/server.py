@@ -1,5 +1,6 @@
 import socket
 import pickle
+from threading import Thread
 from coderunner import test_code
 
 HEADERSIZE = 10
@@ -13,12 +14,7 @@ def package_payload(**kwargs):
 def unpackage_payload(payload):
     return pickle.loads(payload[HEADERSIZE:])
 
-def main():
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.bind((HOST, PORT))
-        while True:
-            s.listen()
-            clientsocket, addr = s.accept()
+def client_connect(clientsocket):
             with clientsocket:
                 full_payload = b''
                 recving = True
@@ -39,6 +35,18 @@ def main():
                         clientsocket.send(payload)
                         clientsocket.close()
                         break
+
+
+def main():
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind((HOST, PORT))
+        while True:
+            s.listen()
+            clientsocket, addr = s.accept()
+            client_thread = Thread(target=client_connect, args=(clientsocket,))
+            client_thread.start()
+            client_thread.join()
+
 
 if __name__ == '__main__':
     main()
