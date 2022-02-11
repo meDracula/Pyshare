@@ -1,13 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Sign Up{% endblock %}
 {% block content %}
-	{% with messages = get_flashed_messages() %}
-		{% if messages %}
-			{% for message in messages %}
-				{{ message }}
-			{% endfor %}
-		{% endif %}
-	{% endwith %}
 	<script src="{{ url_for('static', filename='js/signup.js') }}"></script>
 	<form class="signup-box" method="POST">
 		<h1>Sign up</h1>

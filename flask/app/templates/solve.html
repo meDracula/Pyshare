@@ -8,13 +8,6 @@
 			{{ post.test_code }}
 		</code>
 	</pre>
-	{% with messages = get_flashed_messages() %}
-		{% if messages %}
-			{% for message in messages %}
-				{{ message }}
-			{% endfor %}
-		{% endif %}
-	{% endwith %}
 	<form method="Post">
 		<textarea name="solve_text" cols="120" rows="15" required>{{ solve_text }}</textarea>
 		<br/>
