@@ -48,7 +48,10 @@ db.createUser({
 
 db.users.createIndex({ username: 1 }, { unique: true } );
 db.users.createIndex({ email: 1 }, { unique: true } );
+
 db.posts.createIndex({ title: 1 }, { unique: true } );
 db.posts.createIndex({ title_hash: 1 }, { unique: true } );
 db.posts.createIndex({ title: "text" });
 db.posts.createIndex({ created: -1 });
+
+db.tags.createIndex({ tags: 1 }, { unique: true } );
