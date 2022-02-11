@@ -3,7 +3,8 @@ from datetime import datetime
 
 def create_new_post(title, title_hash, username, description, test_code):
     from app.persistence.repository.user_repo import append_posts
-    post = Post.create(title=title, title_hash=title_hash, username=username, description=description, test_code=test_code, created=datetime.now())
+    post = Post.create(title=title, title_hash=title_hash, username=username,
+            description=description, test_code=test_code, created=datetime.now())
     res = post.save().acknowledged
     if res == True:
         post = get_post(post.title)
@@ -25,6 +26,7 @@ def delete_posts(**kwargs):
 
 def get_post(title):
     return Post.find(title=title).first_or_none()
+
 
 def get_post_hash(title_hash):
     return Post.find(title_hash=title_hash).first_or_none()
