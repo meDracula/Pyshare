@@ -75,3 +75,10 @@ class Post(Document):
         self.comments.append({'username': username, 'comment': text, 'submitted': submitted})
         self.save()
 
+
+class Tags(Document):
+    collection = db.tags
+
+    @classmethod
+    def iter(cls, skip, limit):
+        return ResultList(cls(item) for item in cls.collection.find().skip(skip).limit(limit))
