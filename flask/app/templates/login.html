@@ -12,15 +12,16 @@
 	<h1 class="center">Login</h1>
 	<script src="{{ url_for('static', filename='js/basic.js') }}" ></script>
 	<form class="box" action="login.html" method="POST">
-    <h1 class="center">Login</h1>
-		<input type="text" name="identifier" placeholder="username">
-		<input type="password" name="password" placeholder="password">
-		<input type="submit" name="" value="Login">
-    <span>Not a member?<span> <a href="/sign-up">Sign-up</a>
-    <br />
-    <label for="username_or_email">Wanna sign in using email?
-      <input type="checkbox" name="username" id="username_or_email" onchange="switch_username_email()">
-    </label>
+        <h1 class="center">Login</h1>
+            <input type="text" name="identifier" placeholder="username">
+            <input type="password" name="password" placeholder="password">
+            <input type="submit" name="" value="Login">
+        <span>Not a member?</span> <a href="/sign-up">Sign-up</a>
+        <br />
+        <label for="username_or_email">Wanna sign in using email?
+          <input type="checkbox" name="username" id="username_or_email" onchange="switch_username_email()">
+        </label>
+
 	</form>
 	<span>Would you like to switch to </span>
 {% endblock %}
