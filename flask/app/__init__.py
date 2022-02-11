@@ -18,6 +18,9 @@ def create_app():
         from app.controllers.user_controller import get_profile
         return get_profile(user_id)
 
+    from app.controllers.code_controller import init_testit
+    init_testit(app)
+
     from app.blueprints.admin import bp_admin
     app.register_blueprint(bp_admin)
 
