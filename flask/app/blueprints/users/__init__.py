@@ -31,14 +31,14 @@ def solve_thepost_get(title_hash):
 @login_required
 def solve_thepost_post(title_hash):
     from app.controllers.post_controller import post_solution, get_post_hash
-    from app.controllers.code_controller import test_it
+    from app.controllers.code_controller import testit
     post = get_post_hash(title_hash)
 
     global color
     user_text = request.form.get('solve_text')
     submit = request.form.get('final')
 
-    color = test_it(post.test_code, user_text)
+    color = testit(post.test_code, user_text)
 
     if color:
         global solve_text
