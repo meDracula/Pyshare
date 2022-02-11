@@ -1,6 +1,7 @@
 FROM python:3.9
 
 WORKDIR code/
-COPY ./testit/server.py .
+COPY ./testit .
+
 
 CMD ["python", "server.py"]
