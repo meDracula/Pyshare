@@ -69,14 +69,20 @@ def thepost_get(title_hash):
 @bp_open.post('/posts/<title_hash>')
 @login_required
 def thepost_post(title_hash):
-    from app.controllers.post_controller import submit_comment, get_post_hash
+    from app.controllers.post_controller import submit_comment, get_post_hash, delete_posts
     comment = request.form.get('commenttext')
     user_try = request.form.get('try')
+    delete_post = request.form.get('delete')
+
     post = get_post_hash(title_hash)
     if comment:
         submit_comment(post, current_user.username, comment)
     if user_try:
         return redirect(url_for("bp_user.solve_thepost_get", title_hash=title_hash))
+    if delete_post:
+        delete_posts(post.title)
+        flash("Post deleted")
+        return redirect(url_for("bp_open.posters_get"))
     return redirect(url_for("bp_open.thepost_get", title_hash=title_hash))
 
 

@@ -51,4 +51,9 @@
 			<button type="submit" name="try" value="True">Try!</button>
 		</form>
 	{% endif %}
+	{% if current_user.username == post.username %}
+		<form method="POST">
+			<button type="submit" name="delete" value="True">Delete Post</button>
+		</form>
+	{% endif %}
 {% endblock %}
