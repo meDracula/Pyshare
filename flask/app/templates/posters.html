@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Posts{% endblock %}
+{% block content %}
+	<h1>Posts</h1>
+	<div class="post_list">
+		<h2>{{ sort_type }}</h2>
+		{% if current_user.is_authenticated %}
+			<form method="POST">
+				<button type="submit" name="create" value="true">Create Post</button>
+			</form>
+		{% endif %}
+		<span>Search Parameters:</span>
+			<form method="POST" class="filters">
+				<button id="latest" type="submit" value="true" name="latest"><i>Latest</i></button>
+			</form>
+		<form method="POST">
+			<input id="posts_search" type="text" name="search" placeholder="Search..">
+			<button type="submit" id="search_icon"><i>Search</i></button>
+		</form>
+		<ul>
+			{% if posts %}
+				{% for post in posts %}
+				<li class="posts" >
+					<h3><a href="/posts/{{ post.title_hash }}">{{ post.title }}</a></h3>
+					<span id="username">By: {{ post.username }}</span>
+					<span id="created">Created: {{  post.created.strftime("%Y-%m-%d %H:%M") }}</span>
+				</li>
+				{% endfor %}
+			{% else %}
+			<p id="noresult" class="center">Nothing was found</p>
+			{% endif %}
+
+		</ul>
+	</div>
+	<div class="center">
+		<span>
+		{% if pagecount > 0 %}
+			<a href="{{ url_for('bp_open.posters_get', sort_type=sort_type, search_text=search_text, page=pagecount-1 ) }}">Prev</a>
+		{% endif %}
+		<a href="{{ url_for('bp_open.posters_get', sort_type=sort_type, search_text=search_text, page=pagecount+1) }}">Next</a>
+		</span>
+	</div>
+{% endblock %}
+

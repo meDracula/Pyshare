@@ -1,0 +1,11 @@
+from os import environ
+
+DB_NAME = environ.get('DB_NAME')
+DB_USER = environ.get('DB_USER')
+DB_PASSWORD = environ.get('DB_PASSWORD')
+DB_HOST = environ.get('DB_HOST')
+DB_PORT = environ.get('DB_PORT')
+SECRET_KEY = environ.get('SECRET_KEY')
+
+TESTIT_HOST = environ.get('TESTIT_HOST')
+TESTIT_PORT = environ.get('TESTIT_PORT')
