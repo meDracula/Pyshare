@@ -6,4 +6,9 @@
 	<h1>Your role: {{ current_user.role }}</h1>
 	<h1>Account created: {{ current_user.created }}</h1>
 	<h1>Last active: {{ current_user.last_active }}</h1>
+	{% if current_user.is_authenticated %}
+		<form method="POST">
+			<button type="submit" name="delete_user" value="True">Delete User Account</button>
+		</form>
+	{% endif %}
 {% endblock %}

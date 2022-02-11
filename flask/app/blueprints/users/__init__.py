@@ -16,8 +16,20 @@ def logout():
 
 @bp_user.get('/account')
 @login_required
-def account():
+def account_get():
     return render_template('account.html')
+
+@bp_user.post('/account')
+@login_required
+def account_post():
+    from app.controllers.user_controller import delete_user, logout_user
+    delete = request.form.get('delete_user')
+    if delete:
+        delete_username = current_user.username
+        logout_user()
+        delete_user(delete_username)
+        flash(f"User {delete_username} deleted!")
+    return redirect(url_for('bp_open.home'))
 
 @bp_user.get('/posts/<title_hash>/solve')
 @login_required

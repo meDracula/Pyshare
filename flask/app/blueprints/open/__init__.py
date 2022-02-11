@@ -5,8 +5,9 @@ bp_open = Blueprint('bp_open', __name__)
 
 @bp_open.get('/')
 def index():
-    # if user is login then redirect to account page
-    return redirect('home')
+    if current_user.is_authenticated:
+        return redirect(url_for('bp_user.account_get'))
+    return redirect(url_for('bp_open.home'))
 
 @bp_open.get('/login')
 def login_get():

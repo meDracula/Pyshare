@@ -17,8 +17,8 @@ def search_users(**kwargs):
     return user_repo.get_users(**kwargs)
 
 
-def delete_user(user_identifier):
-    return user_repo.delete_users()
+def delete_user(username):
+    return user_repo.delete_users(username=username)
 
 def logout_user() -> bool:
     return user_repo.logout()
