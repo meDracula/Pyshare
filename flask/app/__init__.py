@@ -30,6 +30,9 @@ def create_app():
     from app.blueprints.users import bp_user
     app.register_blueprint(bp_user)
 
+    from app.blueprints.ajax import bp_ajax
+    app.register_blueprint(bp_ajax, url_prefix='/ajax')
+
     return app
 
 
