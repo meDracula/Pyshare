@@ -26,20 +26,20 @@
 						{% if current_user.is_authenticated %}
 							{% if post._id|string in current_user.votes %}
 								{% if current_user.votes[ post._id|string ] == 1 %}
-									<input type="checkbox" onclick="upvote(this)" value="{{ post.title_hash }}" checked>Up</button>
+									<input type="checkbox" onclick="upvote(this)" value="{{ post.title_hash }}" checked>
 								{% else %}
-									<input type="checkbox" onclick="upvote(this)" value="{{ post.title_hash }}">Up</button>
+									<input type="checkbox" onclick="upvote(this)" value="{{ post.title_hash }}">
 								{% endif %}
 								{{ post.rating }}
 								{% if current_user.votes[ post._id|string ] == -1 %}
-									<input type="checkbox" onclick="downvote(this)" value="{{ post.title_hash }}" checked>Down</button>
+									<input type="checkbox" onclick="downvote(this)" value="{{ post.title_hash }}" checked>
 								{% else %}
-									<input type="checkbox" onclick="downvote(this)" value="{{ post.title_hash }}">Down</button>
+									<input type="checkbox" onclick="downvote(this)" value="{{ post.title_hash }}">
 								{% endif %}
 							{% else %}
-								<input type="checkbox" onclick="upvote(this)" value="{{ post.title_hash }}">Up</button>
+								<input type="checkbox" onclick="upvote(this)" value="{{ post.title_hash }}">
 								{{ post.rating }}
-								<input type="checkbox" onclick="downvote(this)" value="{{ post.title_hash }}">Down</button>
+								<input type="checkbox" onclick="downvote(this)" value="{{ post.title_hash }}">
 							{% endif %}
 						{% else %}
 							{{ post.rating }}

@@ -50,9 +50,9 @@ def append_solution_code(post):
 
 
 def user_vote(post, vote):
-    if post._id in current_user.votes:
+    if str(post._id) in current_user.votes:
         if current_user.votes[f'{post._id}'] != vote:
-            current_user.votes[vote_index] = (post._id, vote)
+            current_user.votes[f'{post._id}'] = vote
         else:
             return False
     else:
