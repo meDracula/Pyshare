@@ -1,12 +1,13 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
+from flask import Blueprint, render_template, request, session, redirect, url_for, flash, abort
 from flask_login import current_user, login_required
 
 bp_open = Blueprint('bp_open', __name__)
 
 @bp_open.get('/')
 def index():
-    # if user is login then redirect to account page
-    return redirect('home')
+    if current_user.is_authenticated:
+        return redirect(url_for('bp_user.account_get'))
+    return redirect(url_for('bp_open.home'))
 
 @bp_open.get('/login')
 def login_get():
@@ -60,23 +61,43 @@ def posters_post():
 @bp_open.get('/posts/<title_hash>')
 def thepost_get(title_hash):
     from app.controllers.post_controller import get_post_hash
+
     post = get_post_hash(title_hash)
+
     if post is None:
         abort(404)
+
+    if current_user.is_authenticated():
+        session['view_post'] = post
+
     return render_template("thepost.html", post=post, current_user=current_user)
 
 
 @bp_open.post('/posts/<title_hash>')
 @login_required
 def thepost_post(title_hash):
-    from app.controllers.post_controller import submit_comment, get_post_hash
+    from app.controllers.post_controller import submit_comment, delete_posts, get_post_hash
+
     comment = request.form.get('commenttext')
     user_try = request.form.get('try')
-    post = get_post_hash(title_hash)
+    delete_post = request.form.get('delete')
+
+    post = session.get('view_post', None)
+    if post is None:
+        post = get_post_hash(title_hash)
+
+
     if comment:
         submit_comment(post, current_user.username, comment)
+
     if user_try:
         return redirect(url_for("bp_user.solve_thepost_get", title_hash=title_hash))
+
+    if delete_post:
+        delete_posts(post.title)
+        flash("Post deleted")
+        return redirect(url_for("bp_open.posters_get"))
+
     return redirect(url_for("bp_open.thepost_get", title_hash=title_hash))
 
 

@@ -29,6 +29,7 @@ def get_post(title: str):
 def get_post_hash(title_hash):
     return post_repo.get_post_hash(title_hash)
 
+
 def post_solution(username:str, solution_code, post):
     return post_repo.post_solution(username, solution_code, post)
 

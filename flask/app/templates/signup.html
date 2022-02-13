@@ -1,26 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Sign Up{% endblock %}
 {% block content %}
-	{% with messages = get_flashed_messages() %}
-		{% if messages %}
-			{% for message in messages %}
-				{{ message }}
-			{% endfor %}
-		{% endif %}
-	{% endwith %}
 	<script src="{{ url_for('static', filename='js/signup.js') }}"></script>
-	<h3 align="center">Sign Up</h3>
-	<form method="POST">
-		<label for="email">Email Address</label>
+	<form class="signup-box" method="POST">
+		<h1>Sign up</h1>
 		<input type="email" id="email" name="email" placeholder="Enter email" required/>
-		<br/>
-		<label for="Username">Username</label>
 		<input type="text" id="username" name="username" placeholder="Enter username" required/>
-		<br/>
-		<label for="password1">Password</label>
 		<input type="password" id="password1" name="password1" placeholder="Enter password" required/>
-		<br/>
-		<label for="password2" >Password (Confirm)</label>
 		<input type="password" id="password2" onchange="verify_password()" name="password2" placeholder="Confirm password" required/>
 		<button type="submit" id="submit" disabled>Submit</button>
 	</form>
