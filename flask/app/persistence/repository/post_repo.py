@@ -41,3 +41,8 @@ def post_solution(username, solution_code, post):
 def submit_comment(post, username, text):
     post.add_comment(username, text, datetime.now())
 
+
+def post_voting(post, vote):
+    post.rating += vote
+    return post.save().acknowledged
+

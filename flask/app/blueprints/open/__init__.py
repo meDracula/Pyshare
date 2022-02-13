@@ -38,6 +38,9 @@ def posters_get():
     search_text = request.args.get('search_text', '', type=str)
     page = request.args.get('page', 0, type=int)
 
+    if current_user.is_authenticated:
+        votes = [vote for vote in current_user.votes]
+
     posts = get_posts(sort_type, page, search=search_text)
     return render_template("posters.html", current_user=current_user, sort_type=sort_type, posts=posts, pagecount=page, search_text=search_text)
 

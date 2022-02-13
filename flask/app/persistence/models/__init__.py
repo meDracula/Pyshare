@@ -22,8 +22,8 @@ class User(Document):
         data = {'schema': 1, 'username': data['username'],
                 'email': data['email'], 'password': None,
                 'role': 'normie', 'badges': [], 'posts': [],
-                'solution_code': [], 'created': data['created'],
-                'last_active': ''}
+                'votes': {}, 'solution_code': [],
+                'created': data['created'], 'last_active': ''}
         user = User(data)
         user.password = password
         del password, data
@@ -48,7 +48,7 @@ class Post(Document):
     def create(cls, **data):
         data = {'schema': 1, 'title': data['title'], 'title_hash': data['title_hash'],
                 'username': data['username'], 'created': data['created'],
-                'description': data['description'], 'rating': 1,
+                'description': data['description'], 'rating': 0,
                 'solved': False, 'test_code': data['test_code'],
                 'solution_codes': [], 'comments': []}
         post = Post(data)
@@ -82,3 +82,4 @@ class Tags(Document):
     @classmethod
     def iter(cls, skip, limit):
         return ResultList(cls(item) for item in cls.collection.find().skip(skip).limit(limit))
+

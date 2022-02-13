@@ -22,6 +22,29 @@
 				{% for post in posts %}
 				<li class="posts" >
 					<h3><a href="/posts/{{ post.title_hash }}">{{ post.title }}</a></h3>
+					<span id="{{ post.title_hash }}">
+						{% if current_user.is_authenticated %}
+							{% if post._id|string in current_user.votes %}
+								{% if current_user.votes[ post._id|string ] == 1 %}
+									<input type="checkbox" onclick="upvote(this)" value="{{ post.title_hash }}" checked>Up</button>
+								{% else %}
+									<input type="checkbox" onclick="upvote(this)" value="{{ post.title_hash }}">Up</button>
+								{% endif %}
+								{{ post.rating }}
+								{% if current_user.votes[ post._id|string ] == -1 %}
+									<input type="checkbox" onclick="downvote(this)" value="{{ post.title_hash }}" checked>Down</button>
+								{% else %}
+									<input type="checkbox" onclick="downvote(this)" value="{{ post.title_hash }}">Down</button>
+								{% endif %}
+							{% else %}
+								<input type="checkbox" onclick="upvote(this)" value="{{ post.title_hash }}">Up</button>
+								{{ post.rating }}
+								<input type="checkbox" onclick="downvote(this)" value="{{ post.title_hash }}">Down</button>
+							{% endif %}
+						{% else %}
+							{{ post.rating }}
+						{% endif %}
+					</span>
 					<span id="username">By: {{ post.username }}</span>
 					<span id="created">Created: {{  post.created.strftime("%Y-%m-%d %H:%M") }}</span>
 				</li>
@@ -43,5 +66,5 @@
 {% endblock %}
 
 {% block scripts %}
-	<script src="{{ url_for('static', filename='/js/ajaxhello.js') }}"></script>
+	<script src="{{ url_for('static', filename='/js/posters.js') }}"></script>
 {% endblock %}
