@@ -6,11 +6,6 @@ bp_ajax = Blueprint('bp_ajax', __name__)
 
 from app.controllers.post_controller import post_voting
 
-@bp_ajax.get('/helloworld')
-def helloworld():
-    result = { 'msg': 'hello world!' }
-    return json.dumps(result)
-
 @bp_ajax.post('/post_vote')
 @login_required
 def post_vote():
