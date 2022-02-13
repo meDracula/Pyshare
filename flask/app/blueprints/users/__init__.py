@@ -34,6 +34,7 @@ def account_post():
 
     return redirect(url_for('bp_open.home'))
 
+
 @bp_user.get('/posts/<title_hash>/solve')
 @login_required
 def solve_thepost_get(title_hash):
@@ -44,7 +45,6 @@ def solve_thepost_get(title_hash):
     if post is None:
         post = get_post_hash(title_hash)
 
-    #color = session.get("color", False)
     color = False
     solve_text = session.get("solve_text", "")
 
@@ -63,19 +63,22 @@ def solve_thepost_post(title_hash):
     submit = request.form.get('final')
 
     color = testit(post.test_code, user_text)
+    session['color'] = color
 
     if color:
         session['solve_text'] = user_text
     else:
         flash("Your code is RED!!!")
 
-    session['color'] = color
 
     if submit:
         post_solution(current_user.username, user_text, post)
+        session.pop('solve_text')
+        session.pop('color')
         return redirect(url_for('bp_open.thepost_get', title_hash=title_hash))
 
     return render_template('solve.html', post=post, solve_text=session.get('solve_text', ""), color=color)
+
 
 @bp_user.get('/posts/create')
 @login_required
