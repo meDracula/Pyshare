@@ -45,7 +45,6 @@ def main():
             clientsocket, addr = s.accept()
             client_thread = Thread(target=client_connect, args=(clientsocket,))
             client_thread.start()
-            client_thread.join()
 
 
 if __name__ == '__main__':
