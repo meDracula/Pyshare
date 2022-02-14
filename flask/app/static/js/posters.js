@@ -6,8 +6,17 @@ function upvote(input) {
 		headers: { 'Content-type': 'application/json' },
 		body: JSON.stringify(params)
 		})
-		.catch(error => alert(error));
-	input.checked = true;
+		.then(response => {
+			if(response.status == 400) {
+				return Promise.reject("Code tampering");
+			}
+			else if (response.status == 200) {
+				return response
+			}
+		})
+		.catch(error => {
+			alert(error)
+		});
 }
 
 function downvote(input) {
@@ -18,6 +27,22 @@ function downvote(input) {
 		headers: { 'Content-type': 'application/json' },
 		body: JSON.stringify(params)
 		})
-		.catch(error => alert(error));
-	input.checked = true;
+		.then(response => {
+			if(response.status == 400) {
+				return Promise.reject("Code tampering");
+			}
+			else if (response.status == 200) {
+				return response
+			}
+		})
+		.catch(error => {
+			alert(error)
+		});
+}
+
+function pressEnter(input) {
+	if (event.keyCode == 13) {
+		this.form.submit();
+	}
+	return false;
 }

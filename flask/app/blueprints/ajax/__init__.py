@@ -12,6 +12,6 @@ def post_vote():
     result = request.get_json()
     result = post_voting(result['title_hash'], result['vote'])
     if not result:
-        return json.dumps({}), 406
+        return json.dumps({}), 400
     return json.dumps({'acknowledged': result}), 200
 
