@@ -1,27 +1,47 @@
 {% extends "base.html" %}
 {% block title %}Posts{% endblock %}
 {% block content %}
-	<h1>Posts</h1>
 	<div class="post_list">
-		<h2>{{ sort_type }}</h2>
-		{% if current_user.is_authenticated %}
-			<form method="POST">
-				<button type="submit" name="create" value="true">Create Post</button>
+		<div id="post_nav">
+			<form method="POST" style="float: left">
+				{% if current_user.is_authenticated %}
+					<button name="create" value="Submit">Create Post</button>
+				{% endif %}
+				<button id="latest" name="latest" value="Submit"><i>Latest</i></button>
 			</form>
-		{% endif %}
-		<span>Search Parameters:</span>
-			<form method="POST" class="filters">
-				<button id="latest" type="submit" value="true" name="latest"><i>Latest</i></button>
+			<form method="POST" style="padding-left: 4px; float: left" >
+				<button id="search_icon"><i>Search</i></button>
+				<input class="posts_search" type="text" onkeydown="pressEnter(this)" name="search" placeholder="Search.." />
 			</form>
-		<form method="POST">
-			<input id="posts_search" type="text" name="search" placeholder="Search..">
-			<button type="submit" id="search_icon"><i>Search</i></button>
-		</form>
+		</div>
 		<ul>
 			{% if posts %}
 				{% for post in posts %}
-				<li class="posts" >
+				<li class="posts">
 					<h3><a href="/posts/{{ post.title_hash }}">{{ post.title }}</a></h3>
+					<span id="{{ post.title_hash }}">
+						{% if current_user.is_authenticated %}
+							{% if post._id|string in current_user.votes %}
+								{% if current_user.votes[ post._id|string ] == 1 %}
+									<input type="radio" name="vote-{{ post.title_hash }}" onclick="upvote(this)" value="{{ post.title_hash }}" checked>
+								{% else %}
+									<input type="radio" name="vote-{{ post.title_hash }}" onclick="upvote(this)" value="{{ post.title_hash }}">
+								{% endif %}
+								{{ post.rating }}
+								{% if current_user.votes[ post._id|string ] == -1 %}
+									<input type="radio" name="vote-{{ post.title_hash }}" onclick="downvote(this)" value="{{ post.title_hash }}" checked>
+								{% else %}
+									<input type="radio" name="vote-{{ post.title_hash }}" onclick="downvote(this)" value="{{ post.title_hash }}">
+								{% endif %}
+							{% else %}
+								<input type="radio" name="vote" onclick="upvote(this)" value="{{ post.title_hash }}">
+								{{ post.rating }}
+								<input type="radio" name="vote" onclick="downvote(this)" value="{{ post.title_hash }}">
+							{% endif %}
+						{% else %}
+							{{ post.rating }}
+						{% endif %}
+					</span>
 					<span id="username">By: {{ post.username }}</span>
 					<span id="created">Created: {{  post.created.strftime("%Y-%m-%d %H:%M") }}</span>
 				</li>
@@ -43,5 +63,5 @@
 {% endblock %}
 
 {% block scripts %}
-	<script src="{{ url_for('static', filename='/js/ajaxhello.js') }}"></script>
+	<script src="{{ url_for('static', filename='/js/posters.js') }}"></script>
 {% endblock %}

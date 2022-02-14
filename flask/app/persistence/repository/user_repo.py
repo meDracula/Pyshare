@@ -28,14 +28,17 @@ def login(user_identifier, password):
         return user.save().acknowledged
     return False
 
+
 def logout():
     current_user.__dict__['last_active'] = datetime.now()
     current_user.save().acknowledged
     logout_user()
 
+
 def append_posts(post):
     current_user.posts.append(post._id)
     return current_user.save()
+
 
 def append_solution_code(post):
     for codes in post.solution_codes:
@@ -44,4 +47,18 @@ def append_solution_code(post):
             break
     current_user.solution_code.append({'post_id':post._id, 'solution_id': solution_id})
     return current_user.save()
+
+
+def user_vote(post, vote):
+    altered = True
+    if str(post._id) in current_user.votes:
+        if current_user.votes[f'{post._id}'] != vote:
+            current_user.votes[f'{post._id}'] = vote
+        else:
+            del current_user.votes[f'{post._id}']
+            altered = False
+    else:
+        current_user.votes[f'{post._id}'] = vote
+    current_user.save().acknowledged
+    return altered
 
