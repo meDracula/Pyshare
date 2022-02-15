@@ -8,9 +8,7 @@
 {% block content %}
 	<h1>Solve {{ post.title }}</h1>
 	<p>{{ post.description }}</p>
-	<pre>
-		<code class="language-python">{{ post.test_code }}</code>
-	</pre>
+	<pre><code class="language-python">{{ post.test_code }}</code></pre>
 	<form method="Post">
 		<textarea id="editor" name="solve_text">{{ solve_text }}</textarea>
 		<br/>

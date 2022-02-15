@@ -44,6 +44,7 @@ main{
 .green_badass_button {
 	--green: #1BFD9C;
 	font-size: 15px;
+	margin: 5px;
 	padding: 0.7em 2.7em;
 	letter-spacing: 0.06em;
 	position: relative;
@@ -83,6 +84,7 @@ main{
 .red_badass_button {
 	--red: #C4352B;
 	font-size: 15px;
+	margin: 5px;
 	padding: 0.7em 2.7em;
 	letter-spacing: 0.06em;
 	position: relative;
@@ -121,6 +123,7 @@ main{
 .yellow_badass_button {
 	--yellow: #EFBB1A;
 	font-size: 15px;
+	margin: 5px;
 	padding: 0.7em 2.7em;
 	letter-spacing: 0.06em;
 	position: relative;
@@ -261,6 +264,28 @@ main{
 	background: rgb(20, 20, 20);
 	border-color: rgb(84, 84, 84);
 	border-radius: 10px;
+}
+
+/* Create Posts */
+.create-title {
+	color: #fff;
+	font-size: 18px;
+	background: rgb(20, 20, 20);
+	border-color: rgb(84, 84, 84);
+	border-radius: 10px;
+	width: 75%;
+	height: 35px;
+	padding: 5px 10px;
+	margin: 8px 5px;
+	box-sizing: border-box;
+}
+
+.create-submit {
+	margin: 10px; 
+	position: relative; 
+	left: 50%;
+	height: 30px;
+	width: 66px;
 }
 
 #welcome-to-pyshare{
