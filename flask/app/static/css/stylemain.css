@@ -1,7 +1,7 @@
 body{
 	margin: 0;
 	color: #fff;
-	background: #181818;
+	background: #0e0e0e;
 }
 
 header{
@@ -17,12 +17,14 @@ header{
 }
 
 .navsection a{
+	text-align: center;
 	box-sizing: border-box;
 	text-decoration: none;
 	font-size: 50px;
 	padding: 25px;
 	line-height: 100px;
 	color: #fff;
+	margin: 10px;
 }
 
 #pyshare{
@@ -83,3 +85,9 @@ main{
 #comments {
 	visibility: hidden;
 }
+
+h1{
+	text-align: center;
+}
+
+
