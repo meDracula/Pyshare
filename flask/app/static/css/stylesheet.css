@@ -1,10 +1,11 @@
-body{
+
+body {
 	margin: 0;
 	color: #fff;
 	background: #0e0e0e;
 }
 
-header{
+header {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -16,7 +17,7 @@ header{
 	overflow-y: hidden;
 }
 
-.navsection a{
+.navsection a {
 	text-align: center;
 	box-sizing: border-box;
 	text-decoration: none;
@@ -27,17 +28,34 @@ header{
 	margin: 10px;
 }
 
-#pyshare{
+#pyshare {
 	background: linear-gradient(144deg, #2ad1c5, #2a8ad1, #2ad172);
 	color: #fff;
 }
 
-main{
+main {
 	margin-top: 100px;
 }
 
-.center{
+.center {
 	text-align: center;
+}
+
+/* Blue */
+.blue_badass_box {
+	--blue: #2A8AD1;
+	font-size: 15px;
+	margin: 5px;
+	letter-spacing: 0.06em;
+	position: relative;
+	font-family: inherit;
+	border-radius: 0.6em;
+	overflow: hidden;
+	transition: all 0.3s;
+	line-height: 1.4em;
+	border: 2px solid var(--blue);
+	background: linear-gradient(to right, rgba(42, 138, 209, 0.1) 1%, transparent 40%,transparent 60% , rgba(42, 138, 209, 0.1) 100%);
+	box-shadow: inset 0 0 10px rgba(42, 209, 114, 0.4), 0 0 9px 3px rgba(42, 209, 114, 0.1);
 }
 
 /* Green */
@@ -112,7 +130,7 @@ main{
 	height: 100%;
 	top: 0;
 	transition: transform .4s ease-in-out;
-	background: linear-gradient(to right, transparent 1%, rgba(196, 53, 43, 0.1) 40%,rgba(196, 53, 43, 0.1) 60% , transparent 100%);
+	background: linear-gradient(to right, transparent 1%, rgba(201, 73, 64, 0.1) 40%,rgba(201, 73, 64, 0.1) 60% , transparent 100%);
 }
 
 .red_badass_button:hover:before {
@@ -179,8 +197,9 @@ main{
 	overflow: hidden;
 }
 
+/* Filter Buttons */
 #post_nav button {
-	background-color: #2587AD;
+	background-color: #252525;
 	border: none;
 	color: white;
 	padding: 15px 32px;
@@ -192,13 +211,13 @@ main{
 
 
 #post_nav button:hover {
-	background-color: #103C4D;
+	background-color: #1D1D1D;
 }
 
 #post_nav .posts_search {
 	font-family: inherit;
 	border: 0;
-	border-bottom: 2px solid #2587AD;
+	border-bottom: 2px solid #252525;
 	outline: 0;
 	font-size: 1.3rem;
 	color: #fff;
@@ -223,17 +242,18 @@ main{
 	padding-left: 0px;
 }
 
-
 .posts {
+	color: #fff;
 	background-color: #2a96c11a;
 	margin-top: 10px;
 	margin-left: 80px;
 	margin-right: 100px;
 	padding: 5px;
 	border-color: #2ad1c5;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: 6px;
+}
+
+.posts a {
+	color: #fff;
 }
 
 .posts h3 {
@@ -244,13 +264,39 @@ main{
 	display: block;
 }
 
-.posts a {
-	color: #fff;
+/* Like Dislike */
+.rating-form input[type="radio"] {
+	cursor: pointer;
+	position: absolute;
+	opacity: 0;
 }
 
-.posts a:hover {
-	color: #5c4696;
+input + svg {
+	cursor: pointer;
 }
+
+.rating-form label {
+	position: relative;
+}
+
+.rating-form svg {
+	fill: rgb(242, 242, 242);
+	height: 1rem;
+	width: 1rem;
+	margin: 0.1rem;
+}
+
+.rating-form input[class="like"]:checked + svg,
+.rating-form input[class="like"]:focus + svg {
+	fill: rgb(0, 204, 79);
+}
+
+.rating-form input[class="dislike"]:checked + svg,
+.rating-form input[class="dislike"]:focus + svg {
+	fill: rgb(229, 132, 0);
+}
+
+
 
 /* The Posts */
 #comments {
@@ -281,8 +327,8 @@ main{
 }
 
 .create-submit {
-	margin: 10px; 
-	position: relative; 
+	margin: 10px;
+	position: relative;
 	left: 50%;
 	height: 30px;
 	width: 66px;
@@ -291,6 +337,7 @@ main{
 #welcome-to-pyshare{
 	text-align: center;
 }
+
 .signup-box{
     width: 600px;
     padding: 80px;
@@ -302,117 +349,129 @@ main{
     text-align: center;
     border-radius: 24px;
 }
-.signup-box h1{
-    color: white;
-    text-transform: uppercase;
-    font-weight: 500;
-}
-.signup-box input[type = "email"],.signup-box input[type = "text"],.signup-box input[type = "password"]{
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid #3498db;
-    padding: 14px 10px;
-    width: 200px;
-    outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s;
-}
-.signup-box input[type = "email"]:focus,.signup-box input[type = "text"]:focus,.signup-box input[type = "password"]:focus{
-    width: 280px;
-    border-color: violet;
-}
-.signup-box button{
-    border:0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid #09a036;
-    padding: 14px 10px;
-    width: 200px;
-    outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s;
-    cursor: pointer;
-}
-.box{
 
-    width: 300px;
-    padding: 40px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #252525;
-    text-align: center;
-    border-radius: 24px;
+.signup-box h1 {
+	color: white;
+	text-transform: uppercase;
+	font-weight: 500;
+}
 
+.signup-box input[type = "email"], .signup-box input[type = "text"], .signup-box input[type = "password"] {
+	border: 0;
+	background: none;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: 2px solid #3498db;
+	padding: 14px 10px;
+	width: 200px;
+	outline: none;
+	color: white;
+	border-radius: 24px;
+	transition: 0.25s;
 }
-.box h1{
-    color: white;
-    text-transform: uppercase;
-    font-weight: 500;
+
+.signup-box input[type = "email"]:focus, .signup-box input[type = "text"]:focus, .signup-box input[type = "password"]:focus {
+	width: 280px;
+	border-color: violet;
 }
-.box input[type = "text"],.box input[type = "password"]{
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid #3498db;
-    padding: 14px 10px;
-    width: 200px;
-    outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s;
+
+.signup-box button {
+	border:0;
+	background: none;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: 2px solid #09a036;
+	padding: 14px 10px;
+	width: 200px;
+	outline: none;
+	color: white;
+	border-radius: 24px;
+	transition: 0.25s;
+	cursor: pointer;
 }
-.box input[type = "text"]:focus,.box input[type = "password"]:focus{
-    width: 280px;
-    border-color: violet;
+
+.box {
+	width: 300px;
+	padding: 40px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: #252525;
+	text-align: center;
+	border-radius: 24px;
 }
+
+.box h1 {
+	color: white;
+	text-transform: uppercase;
+	font-weight: 500;
+}
+
+.box input[type = "text"], .box input[type = "password"]{
+	border: 0;
+	background: none;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: 2px solid #3498db;
+	padding: 14px 10px;
+	width: 200px;
+	outline: none;
+	color: white;
+	border-radius: 24px;
+	transition: 0.25s;
+}
+
+.box input[type = "text"]:focus, .box input[type = "password"]:focus{
+	width: 280px;
+	border-color: violet;
+}
+
 .box input[type = submit]{
-    border:0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid #09a036;
-    padding: 14px 10px;
-    width: 200px;
-    outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s;
-    cursor: pointer;
+	border:0;
+	background: none;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: 2px solid #09a036;
+	padding: 14px 10px;
+	width: 200px;
+	outline: none;
+	color: white;
+	border-radius: 24px;
+	transition: 0.25s;
+	cursor: pointer;
 }
+
 .box input[type = submit]:hover{
-    background: #09a036;
+	background: #09a036;
 }
+
 .box span{
-    color: honeydew;
-    font-weight: lighter;
+	color: honeydew;
+	font-weight: lighter;
 }
+
 .box a {
-    color: #3498db;
+	color: #3498db;
 }
-.accountbox{
-    width: 400px;
-    padding: 80px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #252525;
-    text-align: center;
-    border: 2px solid #3498db;
-    border-radius: 24px;
+
+.accountbox {
+	width: 400px;
+	padding: 80px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: #252525;
+	text-align: center;
+	border: 2px solid #3498db;
+	border-radius: 24px;
 }
+
 .accountbox h1{
     color: white;
     margin-bottom: 45px;
