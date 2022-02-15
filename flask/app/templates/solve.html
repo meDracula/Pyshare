@@ -1,20 +1,36 @@
 {% extends "base.html" %}
+{% block links %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/prism-twilight.css') }} ">
+	<link rel="stylesheet" href="{{ url_for('static', filename='plugins/codemirror/lib/codemirror.css') }} ">
+	<link rel="stylesheet" href="{{ url_for('static', filename='plugins/codemirror/theme/twilight.css') }} ">
+{% endblock %}
 {% block title%}Solve{% endblock %}
 {% block content %}
 	<h1>Solve {{ post.title }}</h1>
 	<p>{{ post.description }}</p>
 	<pre>
-		<code>
-			{{ post.test_code }}
-		</code>
+		<code class="language-python">{{ post.test_code }}</code>
 	</pre>
 	<form method="Post">
-		<textarea name="solve_text" cols="120" rows="15" required>{{ solve_text }}</textarea>
+		<textarea id="editor" name="solve_text">{{ solve_text }}</textarea>
 		<br/>
-		<button type="submit" name="test">Test</button>
+		<button type="submit" name="test" class="yellow_badass_button" >Test</button>
 		{% if color %}
-			<button type="submit" name="final" value="true">Submit</button>
+			<button type="submit" class="green_badass_button" name="final" value="true">Submit</button>
 		{% endif %}
 	</from>
+{% endblock %}
+
+{% block scripts %}
+	<script src="{{ url_for('static', filename='js/prism-twilight.js') }}"></script>
+	<script src="{{ url_for('static', filename='plugins/codemirror/lib/codemirror.js') }}"></script>
+	<script src="{{ url_for('static', filename='plugins/codemirror/mode/python/python.js') }}"></script>
+	<script>
+		let editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
+			mode: "python",
+			theme: "twilight",
+			lineNumbers: true
+		});
+	</script>
 {% endblock %}
 

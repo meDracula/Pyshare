@@ -70,7 +70,7 @@ def thepost_get(title_hash):
     if post is None:
         abort(404)
 
-    if current_user.is_authenticated():
+    if current_user.is_authenticated:
         session['view_post'] = post
 
     return render_template("thepost.html", post=post, current_user=current_user)

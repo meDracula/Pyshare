@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block links %}
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/prism-Okaidia.css') }} ">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/prism-twilight.css') }} ">
+	<link rel="stylesheet" href="{{ url_for('static', filename='plugins/codemirror/lib/codemirror.css') }} ">
+	<link rel="stylesheet" href="{{ url_for('static', filename='plugins/codemirror/theme/twilight.css') }} ">
 {% endblock %}
 {% block title %}Pyshare{% endblock %}
 {% block content %}
@@ -23,12 +25,12 @@
 		{% endfor %}
 	{% endif %}
 	{% if current_user.is_authenticated %}
-		<button type="button" onclick="commentShow()">Write Comment</button>
+		<button type="button" class="green_badass_button" onclick="commentToggle()">Write Comment</button>
 		<form method="Post" id="comments">
-			<fieldset>
+			<fieldset id="post_discussion_box">
 				<label for="commenttext">Write:</label>
-				<input type="text" name="commenttext" required></input>
-				<button type="submit" name="Post">Submit</button>
+				<textarea id="editor" name="commenttext"></textarea>
+				<button type="submit" name="Post" class="twilight_button" value="true">Submit</button>
 			</fieldset>
 		</form>
 	{% endif %}
@@ -37,25 +39,29 @@
 			<h2>Solutions</h2>
 			{% for solution in post.solution_codes %}
 				<span class="author"><b>By: {{ solution.username }}</b></span>
-				<pre>
-					<code class="language-python">{{ solution.solution_code }}</code>
-				</pre>
+				<pre><code class="language-python">{{ solution.solution_code }}</code></pre>
 			{% endfor %}
 		</div>
 	{% endif %}
 	{% if current_user.is_authenticated %}
 		<form method="Post">
-			<button type="submit" name="try" value="True">Try!</button>
-		</form>
-	{% endif %}
-	{% if current_user.username == post.username %}
-		<form method="POST">
-			<button type="submit" name="delete" value="True">Delete Post</button>
+			<button type="submit" class="green_badass_button" name="try" value="True">Try!</button>
+			{% if current_user.username == post.username %}
+				<button type="submit" class="red_badass_button" name="delete" value="True">Delete Post</button>
+			{% endif %}
 		</form>
 	{% endif %}
 {% endblock %}
 
 {% block scripts %}
-	<script src="{{ url_for('static', filename='js/prism-Okaidia.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/prism-twilight.js') }}"></script>
+	<script src="{{ url_for('static', filename='plugins/codemirror/lib/codemirror.js') }}"></script>
+	<script src="{{ url_for('static', filename='plugins/codemirror/mode/markdown/markdown.js') }}"></script>
+	<script>
+		let editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
+			mode: "markdown",
+			theme: "twilight",
+		});
+	</script>
 {% endblock %}
 
