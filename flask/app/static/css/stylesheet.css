@@ -318,7 +318,7 @@ input + svg {
 
 .rating-form input[class="dislike"]:checked + svg,
 .rating-form input[class="dislike"]:focus + svg {
-	fill: rgb(229, 132, 0);
+	fill: rgb(239, 42, 16);
 }
 
 
