@@ -1,9 +1,5 @@
-function commentShow() {
-	if (document.getElementById('comments').style.visibility === "hidden") {
-		document.getElementById('comments').style.visibility = "visible";
-	}
-	else {
-		console.log("visible")
-		document.getElementById('comments').style.visibility = "hidden";
-	}
+function commentToggle() {
+	comment = document.getElementById('comments')
+	comment.style.display == "none" ? comment.style.display = "block" : comment.style.display = "none";
+
 }
