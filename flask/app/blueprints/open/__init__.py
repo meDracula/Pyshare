@@ -9,6 +9,10 @@ def index():
         return redirect(url_for('bp_user.account_get'))
     return redirect(url_for('bp_open.home'))
 
+@bp_open.get('/about')
+def about():
+    return render_template('about.html')
+
 @bp_open.get('/login')
 def login_get():
     return render_template('login.html')
