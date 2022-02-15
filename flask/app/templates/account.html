@@ -7,10 +7,10 @@
         <p>Your role: {{ current_user.role }}</p>
         <p>Account created: {{ current_user.created }}</p>
         <p>Last active: {{ current_user.last_active }}</p>
-    </div>
-	{% if current_user.is_authenticated %}
+        {% if current_user.is_authenticated %}
 		<form method="POST">
 			<button type="submit" name="delete_user" value="True">Delete User Account</button>
 		</form>
 	{% endif %}
+    </div>
 {% endblock %}
