@@ -1,12 +1,16 @@
 from dotenv import load_dotenv
 from flask import Flask
 from flask_login import LoginManager
+from flask_session import Session
 from app.persistence.db import init_db
 
 
 def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('settings.py')
+    app.config["SESSION_PERMANENT"] = False
+    app.config["SESSION_TYPE"] = "filesystem"
+    Session(app)
 
     init_db(app)
 
@@ -18,6 +22,9 @@ def create_app():
         from app.controllers.user_controller import get_profile
         return get_profile(user_id)
 
+    from app.controllers.code_controller import init_testit
+    init_testit(app)
+
     from app.blueprints.admin import bp_admin
     app.register_blueprint(bp_admin)
 
@@ -26,6 +33,9 @@ def create_app():
 
     from app.blueprints.users import bp_user
     app.register_blueprint(bp_user)
+
+    from app.blueprints.ajax import bp_ajax
+    app.register_blueprint(bp_ajax, url_prefix='/ajax')
 
     return app
 

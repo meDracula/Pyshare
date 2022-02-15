@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block links %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/prism-Okaidia.css') }} ">
+{% endblock %}
 {% block title %}Pyshare{% endblock %}
 {% block content %}
 	<h1 class="center">{{ post.title }}</h1>
@@ -10,11 +13,7 @@
 	<article>
 		<h2>Description</h2>
 		<p>{{ post.description }}</p>
-		<pre>
-			<code>
-				{{ post.test_code }}
-			</code>
-		</pre>
+		<pre><code class="language-python">{{ post.test_code }}</code></pre>
 	</article>
 	{% if post.comments|length > 0 %}
 		{% for comment in post.comments %}
@@ -39,9 +38,7 @@
 			{% for solution in post.solution_codes %}
 				<span class="author"><b>By: {{ solution.username }}</b></span>
 				<pre>
-					<code>
-						{{ solution.solution_code }}
-					</code>
+					<code class="language-python">{{ solution.solution_code }}</code>
 				</pre>
 			{% endfor %}
 		</div>
@@ -51,4 +48,14 @@
 			<button type="submit" name="try" value="True">Try!</button>
 		</form>
 	{% endif %}
+	{% if current_user.username == post.username %}
+		<form method="POST">
+			<button type="submit" name="delete" value="True">Delete Post</button>
+		</form>
+	{% endif %}
 {% endblock %}
+
+{% block scripts %}
+	<script src="{{ url_for('static', filename='js/prism-Okaidia.js') }}"></script>
+{% endblock %}
+

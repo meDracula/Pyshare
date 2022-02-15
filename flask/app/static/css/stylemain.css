@@ -41,8 +41,46 @@ main{
 }
 
 /* Posts */
+
 .post_list {
 	margin: 10px;
+	padding-top: 10px;
+}
+
+#post_nav {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#post_nav button {
+	background-color: #2587AD;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+
+
+#post_nav button:hover {
+	background-color: #103C4D;
+}
+
+#post_nav .posts_search {
+	font-family: inherit;
+	border: 0;
+	border-bottom: 2px solid #2587AD;
+	outline: 0;
+	font-size: 1.3rem;
+	color: #fff;
+	padding: 7px 0;
+	background: transparent;
+	transition: border-color 0.2s;
+
 }
 
 .post_list .filters {
@@ -59,15 +97,21 @@ main{
 	padding-left: 0px;
 }
 
-.post_list #search_icon{
-	color: #000;
-	background-color: #3dc4c2;
-	cursor: pointer;
-}
 
 .posts {
-	background: rgba(78, 78, 78, 0.25);
-	margin-top: 5px;
+	background-color: #2a96c11a;
+	margin-top: 10px;
+	margin-left: 80px;
+	margin-right: 100px;
+	padding: 5px;
+	border-color: #2ad1c5;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 6px;
+}
+
+.posts h3 {
+	margin-top: 8px;
 }
 
 .posts span {
@@ -77,6 +121,7 @@ main{
 .posts a {
 	color: #fff;
 }
+
 .posts a:hover {
 	color: #5c4696;
 }
