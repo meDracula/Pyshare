@@ -124,3 +124,6 @@ def signup_post():
     else:
         return redirect(url_for('bp_open.login_get'))
 
+@bp_open.get('/account')
+def account_get():
+    return render_template('account.html')

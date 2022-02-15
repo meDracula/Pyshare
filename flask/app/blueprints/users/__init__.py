@@ -104,4 +104,3 @@ def create_post_post():
     else:
         flash('Your Post have been created')
         return redirect(url_for('bp_open.posters_get'))
-
