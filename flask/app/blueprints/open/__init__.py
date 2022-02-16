@@ -9,6 +9,10 @@ def index():
         return redirect(url_for('bp_user.account_get'))
     return redirect(url_for('bp_open.home'))
 
+@bp_open.get('/about')
+def about():
+    return render_template('about.html')
+
 @bp_open.get('/login')
 def login_get():
     return render_template('login.html')
@@ -70,7 +74,7 @@ def thepost_get(title_hash):
     if post is None:
         abort(404)
 
-    if current_user.is_authenticated():
+    if current_user.is_authenticated:
         session['view_post'] = post
 
     return render_template("thepost.html", post=post, current_user=current_user)
@@ -124,3 +128,6 @@ def signup_post():
     else:
         return redirect(url_for('bp_open.login_get'))
 
+@bp_open.get('/account')
+def account_get():
+    return render_template('account.html')

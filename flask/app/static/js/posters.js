@@ -1,5 +1,6 @@
 function upvote(input) {
 	const params = { title_hash: input.value, vote: 1 };
+	let id = "rate-"+input.value;
 
 	fetch("http://127.0.0.1/ajax/post_vote", {
 		method: 'POST',
@@ -7,12 +8,11 @@ function upvote(input) {
 		body: JSON.stringify(params)
 		})
 		.then(response => {
-			if(response.status == 400) {
-				return Promise.reject("Code tampering");
+			if (response.status == 200) {
+				return response.json();
 			}
-			else if (response.status == 200) {
-				return response
-			}
+		}).then(msg => {
+			document.getElementById(id).innerHTML = msg.rating;
 		})
 		.catch(error => {
 			alert(error)
@@ -21,6 +21,7 @@ function upvote(input) {
 
 function downvote(input) {
 	const params = { title_hash: input.value, vote: -1 };
+	let id = "rate-"+input.value;
 
 	fetch("http://127.0.0.1/ajax/post_vote", {
 		method: 'POST',
@@ -28,12 +29,12 @@ function downvote(input) {
 		body: JSON.stringify(params)
 		})
 		.then(response => {
-			if(response.status == 400) {
-				return Promise.reject("Code tampering");
+			if (response.status == 200) {
+				return response.json();
 			}
-			else if (response.status == 200) {
-				return response
-			}
+		})
+		.then(msg => {
+			document.getElementById(id).innerHTML = msg.rating;
 		})
 		.catch(error => {
 			alert(error)

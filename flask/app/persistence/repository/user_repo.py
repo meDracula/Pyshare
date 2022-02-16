@@ -50,15 +50,13 @@ def append_solution_code(post):
 
 
 def user_vote(post, vote):
-    altered = True
-    if str(post._id) in current_user.votes:
-        if current_user.votes[f'{post._id}'] != vote:
-            current_user.votes[f'{post._id}'] = vote
-        else:
-            del current_user.votes[f'{post._id}']
-            altered = False
-    else:
+    if f'{post._id}' not in current_user.votes: 
         current_user.votes[f'{post._id}'] = vote
+    elif current_user.votes[f'{post._id}'] != vote:
+        current_user.votes[f'{post._id}'] = vote
+    else:
+        del current_user.votes[f'{post._id}']
+        vote = -vote
     current_user.save().acknowledged
-    return altered
+    return vote
 

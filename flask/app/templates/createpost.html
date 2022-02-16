@@ -1,11 +1,38 @@
 {% extends "base.html" %}
+{% block links %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/prism-twilight.css') }} ">
+	<link rel="stylesheet" href="{{ url_for('static', filename='plugins/codemirror/lib/codemirror.css') }} ">
+	<link rel="stylesheet" href="{{ url_for('static', filename='plugins/codemirror/theme/twilight.css') }} ">
+{% endblock %}
 {% block title %}Pyshare{% endblock %}
 {% block content %}
 	<h1>Create Post</h1>
 	<form method="POST">
-		<input type="text" name="title" placeholder="Title" required></input><br/>
-		<textarea name="description">Description</textarea><br/>
-		<textarea name="test_code" rows="10" cols="75" required>test.assertEqual(func(), 'Test Code')</textarea><br/>
-		<button type="submit">Create!</button>
+		<input type="text" name="title" class="create-title" placeholder="Title" required></input><br/>
+		<fieldset id="post_discussion_box">
+			<label for="description">Write:</label>
+			<textarea id="editormd" style="margin: 10px;" name="description">Description</textarea>
+			<h3>Write a unittest</h3>
+			<textarea id="editorpy" name="test_code">test.assertEqual(func(), 'Test Code')</textarea>
+		</fieldset>
+		<button type="submit" class="twilight_button center create-submit">Create!</button>
 	</form>
+{% endblock %}
+{% block scripts %}
+	<script src="{{ url_for('static', filename='js/prism-twilight.js') }}"></script>
+	<script src="{{ url_for('static', filename='plugins/codemirror/lib/codemirror.js') }}"></script>
+	<script src="{{ url_for('static', filename='plugins/codemirror/mode/python/python.js') }}"></script>
+	<script src="{{ url_for('static', filename='plugins/codemirror/mode/markdown/markdown.js') }}"></script>
+	<script>
+		let editorpy = CodeMirror.fromTextArea(document.getElementById('editorpy'), {
+			mode: "python",
+			theme: "twilight",
+			lineNumbers: true
+		});
+
+		let editormd = CodeMirror.fromTextArea(document.getElementById('editormd'), {
+			mode: "markdown",
+			theme: "twilight",
+		});
+	</script>
 {% endblock %}

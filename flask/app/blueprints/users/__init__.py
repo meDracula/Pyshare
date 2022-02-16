@@ -72,7 +72,7 @@ def solve_thepost_post(title_hash):
 
 
     if submit:
-        post_solution(current_user.username, user_text, post)
+        post_solution(current_user.username, session['solve_text'], post)
         session.pop('solve_text')
         session.pop('color')
         return redirect(url_for('bp_open.thepost_get', title_hash=title_hash))
@@ -104,4 +104,3 @@ def create_post_post():
     else:
         flash('Your Post have been created')
         return redirect(url_for('bp_open.posters_get'))
-

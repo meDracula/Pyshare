@@ -31,6 +31,7 @@ def get_post(title):
 def get_post_hash(title_hash):
     return Post.find(title_hash=title_hash).first_or_none()
 
+
 def post_solution(username, solution_code, post):
     from app.persistence.repository.user_repo import append_solution_code
     post.post_solution(username, datetime.now(), solution_code)
@@ -44,5 +45,6 @@ def submit_comment(post, username, text):
 
 def post_voting(post, vote):
     post.rating += vote
-    return post.save().acknowledged
+    post.save().acknowledged
+    return post.rating
 

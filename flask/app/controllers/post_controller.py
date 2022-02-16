@@ -43,7 +43,8 @@ def post_voting(title_hash, vote):
 
     if vote == 1 or vote == -1:
         post = get_post_hash(title_hash)
-        return post_repo.post_voting(post, vote) if user_vote(post, vote) else post_repo.post_voting(post, -vote)
+        vote = user_vote(post, vote)
+        return post_repo.post_voting(post, vote)
     else:
         return False
 
