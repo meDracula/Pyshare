@@ -11,7 +11,7 @@ body {
 	color: #fff;
 }
 
-ul {
+.navsection{
     position: fixed;
 	top: 0;
 	left: 0;
@@ -19,11 +19,28 @@ ul {
 	height: 100px;
 	width: 100%;
 	background: #111;
-	list-style-type: none;
+    list-style-type: none;
+
+
+}
+.navsection ul {
+
+    position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	height: 100px;
+	width: 100%;
+	background: #111;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
-li {
-  float: left;
+
+.navsection li {
+
+    float: left;
 }
 .navsection a {
 	text-align: center;
@@ -37,7 +54,7 @@ li {
 }
 
 li.dropdown {
-  display: inline-block;
+    display: inline-block;
 }
 
 .dropdown-content {
