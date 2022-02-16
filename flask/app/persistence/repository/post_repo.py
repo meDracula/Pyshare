@@ -45,5 +45,6 @@ def submit_comment(post, username, text):
 
 def post_voting(post, vote):
     post.rating += vote
-    return post.save().acknowledged
+    post.save().acknowledged
+    return post.rating
 
