@@ -63,19 +63,18 @@ def solve_thepost_post(title_hash):
     submit = request.form.get('final')
 
     color = testit(post.test_code, user_text)
-    session['color'] = color
 
-    if color:
-        session['solve_text'] = user_text
-    else:
+    if not color:
         flash("Your code is RED!!!")
 
-
-    if submit:
+    if submit and session['solve_text'] == user_text:
         post_solution(current_user.username, session['solve_text'], post)
         session.pop('solve_text')
         session.pop('color')
         return redirect(url_for('bp_open.thepost_get', title_hash=title_hash))
+
+    session['color'] = color
+    session['solve_text'] = user_text
 
     return render_template('solve.html', post=post, solve_text=session.get('solve_text', ""), color=color)
 
