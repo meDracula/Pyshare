@@ -8,7 +8,7 @@
 		<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
 		{% block links %}
 		{% endblock %}
-		<title>Pyshare</title>
+		<title>{% block title %} Pyshare {% endblock %}</title>
 	</head>
 	<body>
         <nav class="navsection">
