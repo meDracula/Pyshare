@@ -16,6 +16,8 @@ def get_posts(sort_type: str, skip: int, limit=10, search=""):
         return post_repo.latest_posts(skip, limit)
     elif sort_type == 'search':
         return post_repo.search_post_title(search, skip, limit)
+    elif sort_type == 'rating':
+        return post_repo.rating_posts(skip, limit)
 
 
 def delete_posts(title: str):

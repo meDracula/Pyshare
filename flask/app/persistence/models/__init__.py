@@ -65,6 +65,12 @@ class Post(Document):
     def latest(cls, skip, limit):
         return ResultList(cls(item) for item in cls.collection.find().sort('created', -1).skip(skip).limit(limit))
 
+
+    @classmethod
+    def rating(cls, skip, limit):
+        return ResultList(cls(item) for item in cls.collection.find().sort('rating', -1).skip(skip).limit(limit))
+
+
     def post_solution(self, username, created, solution_code):
         solve_dict = {'solution_id': len(self.solution_codes),  'username': username, 'submitted':created, 'solution_code': solution_code }
         self.solution_codes.append(solve_dict)

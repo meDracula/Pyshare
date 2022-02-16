@@ -56,12 +56,14 @@ def posters_post():
 
     create = request.form.get('create')
     latest = request.form.get('latest')
+    rating = request.form.get('rating')
     search_text = request.form.get('search')
 
     if create:
         return redirect(url_for('bp_user.create_post'))
 
-    sort_type = "search" if search_text is not None and latest is None else "latest"
+    sort_type = next((sort for sort in [latest, rating, search_text] if sort))
+
     return redirect(url_for('bp_open.posters_get', sort_type=sort_type, search_text=search_text, page=page))
 
 

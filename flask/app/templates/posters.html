@@ -5,9 +5,10 @@
 		<div id="post_nav">
 			<form method="POST" style="float: left">
 				{% if current_user.is_authenticated %}
-					<button name="create" value="Submit">Create Post</button>
+					<button name="create" value="create">Create Post</button>
 				{% endif %}
-				<button id="latest" name="latest" value="Submit"><i>Latest</i></button>
+				<button id="latest" name="latest" value="latest"><i>Latest</i></button>
+				<button id="rating" name="rating" value="rating"><i>Rating</i></button>
 			</form>
 			<form method="POST" style="padding-left: 4px; float: left" >
 				<button id="search_icon"><i>Search</i></button>

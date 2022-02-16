@@ -20,6 +20,10 @@ def latest_posts(skip: int, limit: int):
     return Post.latest(skip, limit).full_or_none()
 
 
+def rating_posts(skip: int, limit: int):
+    return Post.rating(skip, limit).full_or_none()
+
+
 def delete_posts(**kwargs):
     return Post.delete(**kwargs)
 
