@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block links %}
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/prism-twilight.css') }} ">
+	<link rel="stylesheet" href="{{ url_for('static', filename='plugins/prismjs/css/prism-twilight.css') }} ">
 	<link rel="stylesheet" href="{{ url_for('static', filename='plugins/codemirror/lib/codemirror.css') }} ">
 	<link rel="stylesheet" href="{{ url_for('static', filename='plugins/codemirror/theme/twilight.css') }} ">
 {% endblock %}
@@ -53,7 +53,7 @@
 {% endblock %}
 
 {% block scripts %}
-	<script src="{{ url_for('static', filename='js/prism-twilight.js') }}"></script>
+	<script src="{{ url_for('static', filename='plugins/prismjs/js/prism-twilight.js') }}"></script>
 	<script src="{{ url_for('static', filename='plugins/codemirror/lib/codemirror.js') }}"></script>
 	<script src="{{ url_for('static', filename='plugins/codemirror/mode/markdown/markdown.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/comments.js') }}" ></script>
