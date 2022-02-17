@@ -1,36 +1,41 @@
 # PyShare
-This will be a stackoverflow type platform where users have profiles and can post problems they need help with.
-As the name suggest it will be a Python only deal.
+## Table of Content
+1. [Why did you build this project?](#Why did you build this project?)
+2. [The solution](#The solution?)
+3. [What could have been](#What could have been!)
+4. [Resources](#Resources)
+5. [Insperation](#Insperation)
 
-The user have a problem. Now the user loggs in and create a problem post to solve.
-This problem Post contain:
-- A title for the problem
-- A descrption:
-	- What needs to be solved in text
-	- IF there is anything out of the ordernary
-	- with a required solution.
-- **TEST CASE CODE** for what needs to be solved. Written by the user
+### Why did you build this project?
+Hours spent on looking for that python anwsers online. And een though you have a stackoverflow account you just don't
+have the energy to deal with code dumping that is remotely the point or mabye you have enoughing to dump.
+I and all of our Collaborators have had this problem. This project was conceived for a school assigment to develop a website
+out of our own imagination in a time span of ... .
 
-Change for stackoverflow well the test case is to replace the annoying code dump and giving the user the
-power to express more exact in a test of what requirement he/she wishes to solve.
+## The solution?
+Pyshare solve the endless looking for answer on online and dropping pointless code dumps. Pyshare is as the name suggest
+it is a Python only deal. Where the user post **UNITTEST** of what problem they need help with. Giving user a **Test Driven**
+platform for asking for help and instead of wasting it on words just write a **TEST**.
+- **TEST CASES** for what the user needs help with.
 
-The users can now se the new code problem and start building a function that meets the users requirements.
-The code will be written in a textbox underneeth the problem post and can be runned against the users test case until it passes.
-If the solver(user) gets the green box by passing all test he/she can post the solution.
+By also posting test missunderstandment will dractictlly switch from writting prefect description to just looking at the test
+and writting a solution for it.
 
-This solution will not be the simple green box stackoverflow stuff but instead many users after getting the pass on the test can post
-the solution and then rate the others users solutions.(Like in codewars withe Best practices, Clever, ..., effective, average)
+## What could have been!
+This solution will not be the simple green checkbox stackoverflow stuff but instead many users after getting the pass on the unittest can post
+the solution and then rate the others users solutions(Like in codewars withe Best practices, Clever, ..., effective, average).
 
-### Extra features
-* A Challenge category:
-	- Users can post problem not for a practical reason of help but for challanging other users to solve.
-	- The challenge feature will give more of a ranking to users profiles and their skills
-* A Code dump category:
-	- A copy-paste of the users code that is relevant to the error as the user percives it.
-	- A textbox of a copy-paste with error from 1st line(start) to the last line(finish)
-
+## Resources
+This project is built from these resources and import.
+* **Flask**
+* **Docker**
+* **Ningx**
+* **MongoDB**
+* [PrismJS](https://prismjs.com/index.html)
+* [Codemirror](https://codemirror.net/)
 
 ## Insperation
 A merge between stackoverflow and Codewars.
 * **Stackoverflow**
 * **Codewars**
+
