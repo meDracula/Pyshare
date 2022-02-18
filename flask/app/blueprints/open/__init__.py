@@ -62,7 +62,7 @@ def posters_post():
     if create:
         return redirect(url_for('bp_user.create_post'))
 
-    sort_type = next((sort for sort in [latest, rating, search_text] if sort))
+    sort_type = next((sort for sort in [latest, rating, search_text] if sort), "latest")
 
     return redirect(url_for('bp_open.posters_get', sort_type=sort_type, search_text=search_text, page=page))
 
