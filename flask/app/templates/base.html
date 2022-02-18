@@ -15,7 +15,11 @@
 				<li><a id="home" href="/home">Home </a></li>
 				<li><a id="posts" href="/posts">Posts</a></li>
 				<li><a id="pyshare" href="/">Pyshare</a></li>
-				<li><a id="account" href="/account">Account</a>
+				{% if current_user.is_authenticated %}
+					<li><a id="account" href="/account">Account</a>
+				{% else %}
+					<li><a id="account" href="/login">Account</a>
+				{% endif %}
 					<ul>
 						{% if current_user.role == "admin" %}
 							<li><a id="logout" href="/logout">Logout</a></li>
