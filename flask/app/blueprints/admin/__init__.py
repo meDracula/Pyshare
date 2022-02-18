@@ -13,4 +13,3 @@ def before_request():
 @login_required
 def admin_page():
     return render_template('admin.html')
-

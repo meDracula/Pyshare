@@ -1,13 +1,15 @@
 import unittest
 
+
 class UserSubmittedTest(unittest.TestCase):
     def solve_vs_test(self, code):
         test = self
         try:
             exec(code)
             return True
-        except:
+        except Exception as e:
             return False
+
 
 def test_code(test_code, solve_text):
     code = solve_text + "\n" + test_code
