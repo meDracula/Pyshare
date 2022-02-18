@@ -6,9 +6,6 @@ db = None
 
 
 def init_db(app, show=False):
-    """
-    Set environment variables for the database in .env file in the project root directory.
-    """
     global client, db
     username = app.config["DB_USER"]
     password = app.config["DB_PASSWORD"]
@@ -34,6 +31,7 @@ class ResultList(list):
 
     def full_or_none(self):
         return self if len(self) > 0 else None
+
 
 class Document(dict, ABC):
     collection = None
@@ -76,10 +74,9 @@ class Document(dict, ABC):
 
     @classmethod
     def find_parallel(cls, **kwargs):
-        arr = [{key:kwargs[key]} for key in kwargs]
-        return ResultList(cls(item) for item in cls.collection.find({ "$or": arr }))
+        arr = [{key: kwargs[key]} for key in kwargs]
+        return ResultList(cls(item) for item in cls.collection.find({"$or": arr}))
 
     @classmethod
     def delete(cls, **kwargs):
         cls.collection.delete_many(kwargs)
-

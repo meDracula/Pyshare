@@ -3,19 +3,23 @@ from flask_login import current_user, login_required
 
 bp_open = Blueprint('bp_open', __name__)
 
+
 @bp_open.get('/')
 def index():
     if current_user.is_authenticated:
         return redirect(url_for('bp_user.account_get'))
     return redirect(url_for('bp_open.home'))
 
+
 @bp_open.get('/about')
 def about():
     return render_template('about.html')
 
+
 @bp_open.get('/login')
 def login_get():
     return render_template('login.html')
+
 
 @bp_open.post('/login')
 def login_post():
@@ -30,9 +34,11 @@ def login_post():
         flash('Wrong Username/Email or password!')
         return redirect(url_for('bp_open.login_get'))
 
+
 @bp_open.get('/home')
 def home():
     return render_template('home.html')
+
 
 @bp_open.get('/posts')
 def posters_get():
@@ -48,6 +54,7 @@ def posters_get():
     posts = get_posts(sort_type, page, search=search_text)
     return render_template("posters.html", current_user=current_user, sort_type=sort_type, posts=posts, pagecount=page, search_text=search_text)
 
+
 @bp_open.post('/posts')
 def posters_post():
     from app.controllers.post_controller import get_posts
@@ -62,7 +69,7 @@ def posters_post():
     if create:
         return redirect(url_for('bp_user.create_post'))
 
-    sort_type = next((sort for sort in [latest, rating, search_text] if sort))
+    sort_type = next((sort for sort in [latest, rating, search_text] if sort), "latest")
 
     return redirect(url_for('bp_open.posters_get', sort_type=sort_type, search_text=search_text, page=page))
 
@@ -95,7 +102,6 @@ def thepost_post(title_hash):
     if post is None:
         post = get_post_hash(title_hash)
 
-
     if comment:
         submit_comment(post, current_user.username, comment)
 
@@ -114,6 +120,7 @@ def thepost_post(title_hash):
 def signup_get():
     return render_template('signup.html')
 
+
 @bp_open.post('/signup')
 def signup_post():
     from app.controllers.user_controller import create_new_user
@@ -124,11 +131,12 @@ def signup_post():
     password2 = request.form.get('password2')
 
     result = create_new_user(username, email, password1)
-    if result != True:
+    if result is not True:
         flash(f"Not Unique {result}")
         return redirect(url_for('bp_open.signup_get'))
     else:
         return redirect(url_for('bp_open.login_get'))
+
 
 @bp_open.get('/account')
 def account_get():

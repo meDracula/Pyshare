@@ -41,6 +41,7 @@ class User(Document):
     def verify_password(cls, password_hash, password):
         return argon2.verify(password, password_hash)
 
+
 class Post(Document):
     collection = db.posts
 
@@ -58,21 +59,19 @@ class Post(Document):
     @classmethod
     def text_search(cls, search, skip, limit):
         return ResultList(cls(item) for item in cls.collection.find(
-            { "$text": { "$search": search }}, { "score": { "$meta": "textScore"}})
-            .sort( "score", -1 ).skip(skip).limit(limit))
+            {"$text": {"$search": search}}, {"score": {"$meta": "textScore"}})
+            .sort("score", -1).skip(skip).limit(limit))
 
     @classmethod
     def latest(cls, skip, limit):
         return ResultList(cls(item) for item in cls.collection.find().sort('created', -1).skip(skip).limit(limit))
 
-
     @classmethod
     def rating(cls, skip, limit):
         return ResultList(cls(item) for item in cls.collection.find().sort('rating', -1).skip(skip).limit(limit))
 
-
     def post_solution(self, username, created, solution_code):
-        solve_dict = {'solution_id': len(self.solution_codes),  'username': username, 'submitted':created, 'solution_code': solution_code }
+        solve_dict = {'solution_id': len(self.solution_codes),  'username': username, 'submitted': created, 'solution_code': solution_code}
         self.solution_codes.append(solve_dict)
         self.solved = True
         self.save()
@@ -88,4 +87,3 @@ class Tags(Document):
     @classmethod
     def iter(cls, skip, limit):
         return ResultList(cls(item) for item in cls.collection.find().skip(skip).limit(limit))
-

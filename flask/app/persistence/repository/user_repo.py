@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user, current_user
 from datetime import datetime
 
 
-def create_new_user(username:str, email:str, password:str):
+def create_new_user(username: str, email: str, password: str):
     user = User.create(password, username=username, email=email, created=datetime.now())
     return user.save().acknowledged
 
@@ -45,12 +45,12 @@ def append_solution_code(post):
         if codes['username'] == current_user.username:
             solution_id = codes['solution_id']
             break
-    current_user.solution_code.append({'post_id':post._id, 'solution_id': solution_id})
+    current_user.solution_code.append({'post_id': post._id, 'solution_id': solution_id})
     return current_user.save()
 
 
 def user_vote(post, vote):
-    if f'{post._id}' not in current_user.votes: 
+    if f'{post._id}' not in current_user.votes:
         current_user.votes[f'{post._id}'] = vote
     elif current_user.votes[f'{post._id}'] != vote:
         current_user.votes[f'{post._id}'] = vote
@@ -59,4 +59,3 @@ def user_vote(post, vote):
         vote = -vote
     current_user.save().acknowledged
     return vote
-

@@ -19,6 +19,7 @@ def logout():
 def account_get():
     return render_template('account.html')
 
+
 @bp_user.post('/account')
 @login_required
 def account_post():
@@ -84,6 +85,7 @@ def solve_thepost_post(title_hash):
 def create_post():
     return render_template('createpost.html')
 
+
 @bp_user.post('/posts/create')
 @login_required
 def create_post_post():
@@ -96,7 +98,7 @@ def create_post_post():
     if description == 'Description':
         description = ""
 
-    res = create_new_post( title, current_user.username, description, test_code)
+    res = create_new_post(title, current_user.username, description, test_code)
     if res == 'title':
         flash(f'Your {res} is not unique!')
         return redirect(url_for('bp_user.create_post'))

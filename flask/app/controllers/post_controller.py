@@ -1,7 +1,8 @@
 from app.persistence.repository import post_repo
 from datetime import datetime
 
-def create_new_post(title:str, username:str, description:str, test_code):
+
+def create_new_post(title: str, username: str, description: str, test_code):
     title_hash = str(hash(title))
     return post_repo.create_new_post(title, title_hash, username, description, test_code)
 
@@ -32,7 +33,7 @@ def get_post_hash(title_hash):
     return post_repo.get_post_hash(title_hash)
 
 
-def post_solution(username:str, solution_code, post):
+def post_solution(username: str, solution_code, post):
     return post_repo.post_solution(username, solution_code, post)
 
 
@@ -49,4 +50,3 @@ def post_voting(title_hash, vote):
         return post_repo.post_voting(post, vote)
     else:
         return False
-

@@ -1,7 +1,7 @@
 from app.persistence.repository import user_repo
 
 
-def create_new_user(username:str, email:str, password:str):
+def create_new_user(username: str, email: str, password: str):
     return user_repo.create_new_user(username, email, password)
 
 
@@ -19,6 +19,7 @@ def search_users(**kwargs):
 
 def delete_user(username):
     return user_repo.delete_users(username=username)
+
 
 def logout_user() -> bool:
     return user_repo.logout()

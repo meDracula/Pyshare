@@ -2,7 +2,7 @@ from app.persistence.models import Tags
 
 
 def create_new_tag(tag):
-    tag = Tags({'schema': 1, 'tag':tag})
+    tag = Tags({'schema': 1, 'tag': tag})
     return tag.save().acknowledged
 
 

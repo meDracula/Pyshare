@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 	<head>
-
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheet.css') }}">
@@ -11,31 +10,33 @@
 		<title>{% block title %} Pyshare {% endblock %}</title>
 	</head>
 	<body>
-        <nav class="navsection">
-            <ul>
-            <li><a id="home" href="/home">Home </a></li>
-            <li><a id="posts" href="/posts">Posts</a></li>
-            <li><a id="pyshare" href="/">Pyshare</a></li>
-            <li><a id="about" href="/about">About</a></li>
-            <li class="dropdown">
-                <a class="dropbtn">Account</a>
-                <div class="dropdown-content">
-                    {% if current_user.role == "admin" %}
-                        <a id="logout" href="/logout">Logout</a>
-                        <a id="admin" href="/admin">Admin</a>
-                        <a id="account" href="/account">Account</a>
-                    {% elif current_user.is_authenticated %}
-                        <a id="logout" href="/logout">Logout</a>
-                        <a id="account" href="/account">Account</a>
-                    {% else %}
-                        <a id="signUp" href="/signup">Sign-up</a>
-                        <a id="login" href="/login">Login</a>
-                    {% endif %}
-
-                </div>
-            </li>
-            </ul>
-        </nav>
+		<nav class="navsection">
+			<ul>
+				<li><a id="home" href="/home">Home </a></li>
+				<li><a id="posts" href="/posts">Posts</a></li>
+				<li><a id="pyshare" href="/">Pyshare</a></li>
+				{% if current_user.is_authenticated %}
+					<li><a id="account" href="/account">Account</a>
+				{% else %}
+					<li><a id="account" href="/login">Account</a>
+				{% endif %}
+					<ul>
+						{% if current_user.role == "admin" %}
+							<li><a id="logout" href="/logout">Logout</a></li>
+							<li><a id="admin" href="/admin">Admin</a></li>
+							<li><a id="account" href="/account">Account</a></li>
+						{% elif current_user.is_authenticated %}
+							<li><a id="logout" href="/logout">Logout</a></li>
+							<li><a id="account" href="/account">Account</a></li>
+						{% else %}
+							<li><a id="signUp" href="/signup">Sign-up</a></li>
+							<li><a id="login" href="/login">Login</a></li>
+					{% endif %}
+					</ul>
+				</li>
+				<li><a id="about" href="/about">About</a></li>
+			</ul>
+		</nav>
 		<main>
 			{% with messages = get_flashed_messages() %}
 				{% if messages %}
@@ -53,3 +54,4 @@
 		{% endblock %}
 	</body>
 </html>
+
