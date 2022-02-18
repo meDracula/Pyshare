@@ -19,7 +19,7 @@ class User(Document):
 
     @classmethod
     def create(cls, password, **data):
-        data = {'schema': 1, 'username': data['username'],
+        data = {'schema': 2, 'username': data['username'],
                 'email': data['email'], 'password': None,
                 'role': 'normie', 'badges': [], 'posts': [],
                 'votes': {}, 'solution_code': [],
@@ -47,7 +47,7 @@ class Post(Document):
 
     @classmethod
     def create(cls, **data):
-        data = {'schema': 1, 'title': data['title'], 'title_hash': data['title_hash'],
+        data = {'schema': 2, 'title': data['title'], 'title_hash': data['title_hash'],
                 'username': data['username'], 'created': data['created'],
                 'description': data['description'], 'rating': 0,
                 'solved': False, 'test_code': data['test_code'],
